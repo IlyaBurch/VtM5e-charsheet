@@ -1,38 +1,32 @@
 <template>
-    <Card class="card">
-        <template #content>
-            <div class="attribute__li">
-                <p>{{ props.name }}</p>
-                <div>
-                    <RadioButton v-model="first" :value="true"/>
-                    <RadioButton/>
-                    <RadioButton/>
-                    <RadioButton/>
-                    <RadioButton/>
-                </div>
-            </div>
-        </template>
-    </Card>
+    <div v-if="isEditing">
+        <p>{{ props.name }}</p>
+        <div>
+            <p>{{ props.value }}</p>
+        </div>
+    </div>
+    <div v-else class="attribute__li">
+        <p>{{ name }}</p>
+        <div>
+            <InputNumber v-model="val"/>
+        </div>
+    </div>
 </template>
 
 <script setup>
-import Button from 'primevue/button'
-import SplitButton from 'primevue/splitbutton'
-import Card from 'primevue/card'
-import Panel from 'primevue/panel'
-import Avatar from 'primevue/avatar'
-import RadioButton from 'primevue/radiobutton'
-import { computed, ref } from 'vue'
-import {useCounterStore} from '@/stores/counter'
+import InputNumber from 'primevue/inputnumber';
+import { ref } from 'vue';
 
-const props = defineProps(['name', 'id'])
-const attributes = useCounterStore();
-let first = ref(null);
+const props = defineProps(['name','value', 'isEditing'])
 
-let currentAttribute = attributes.attributes
-let currentNum = 0;
+let name = ref(props.name);
+let val = defineModel('value')
+// let first = ref(null);
 
-console.log(currentAttribute)
+// let currentAttribute = attributes.arrAtributes;
+// let currentNum = 0;
+
+// console.log(currentAttribute)
 
 
 
@@ -43,5 +37,9 @@ console.log(currentAttribute)
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.card{
+    padding: 0;
 }
 </style>

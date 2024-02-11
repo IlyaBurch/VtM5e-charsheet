@@ -6,18 +6,12 @@
             </template>
 
             <template #end> <SplitButton label="Save" icon="pi pi-check" :model="items"></SplitButton></template>
+            
         </Toolbar>
+        <!-- TODO: тулбар перенести в хэдер в роутере -->
+        <InputSwitch v-model="isEditing"/>
         <div class="card flex justify-content-center">
-        <!-- <Card>
-            <template #title>
-                <p>{{ name }}</p>
-            </template>
-            <template #content>
-                <p>Клан - {{ clan }}</p>
-                <p>Концепция - {{ lorem }}</p>
-            </template>
-        </Card> -->
-        <Panel toggleable>
+        <Panel toggleable collapsed>
             <template #header>
                 <div class="flex align-items-center gap-3">
                     <Avatar label="V" size="large" shape="circle" />
@@ -33,37 +27,46 @@
             <p>Стиль охоты - {{ lorem }}</p>
             <p>Поколение - {{ lorem }}</p>
         </Panel>
+        <Panel toggleable collapsed>
+            <template #header>
+                Здоровье и голод
+            </template>
+            <CommonList :commons="attributes.commons"/>
+        </Panel>
         <!-- <h3>
             Характеристики
         </h3> -->
-        <Panel toggleable>
+        <Panel toggleable collapsed>
             <template #header>
                 Харарктеристики
             </template>
-            <CharAttributes name="Сила" id="strength"/>
-            <CharAttributes name="Ловкость" id="dexterity"/>
-            <CharAttributes name="Выносливость" id="stamina"/>
-            <CharAttributes name="Обаяние" id='charisma'/>
-            <CharAttributes name="Манипуляция" id="manipulation"/>
-            <CharAttributes name="Самообладание" id="composure"/>
-            <CharAttributes name="Интеллект" id="intelligence"/>
-            <CharAttributes name="Смекалка" id="wits"/>
-            <CharAttributes name="Упорство" id='resolve'/>
+            <AttributesList :attributes="attributes.attributes"/>
+        </Panel>
+        <Panel toggleable collapsed>
+            <template #header>
+                Навыки
+            </template>
+            <AbilityList :abilities="attributes.abilities"/>
         </Panel>
     </div>
     </div>
 </template>
 
 <script setup>
+import {useCounterStore} from '@/stores/counter'
 import Toolbar from 'primevue/toolbar'
 import { ref } from 'vue';
 import Button from 'primevue/button'
 import SplitButton from 'primevue/splitbutton'
-import Card from 'primevue/card'
 import Panel from 'primevue/panel'
 import Avatar from 'primevue/avatar'
-import RadioButton from 'primevue/radiobutton'
-import CharAttributes from '@/components/CharAttributes.vue';
+import InputSwitch from 'primevue/inputswitch';
+
+import AttributesList from '@/components/AttributesList.vue';
+import AbilityList from '@/components/AbilityList.vue';
+import CommonList from '@/components/CommonList.vue';
+
+const attributes = useCounterStore();
 
 const items = ref([
     {
@@ -76,6 +79,7 @@ const items = ref([
     }
 ])
 
+let isEditing = ref(true)
 const name = 'Головач Лена';
 const clan = 'бруха'
 const lorem = 'lorem ipsum'
