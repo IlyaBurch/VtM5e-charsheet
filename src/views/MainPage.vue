@@ -16,7 +16,7 @@
             <template #header>
                 Здоровье и голод
             </template>
-            <CommonList :commons="store.commons"/>
+            <CommonList/>
         </Panel>
 
         <Panel toggleable collapsed>

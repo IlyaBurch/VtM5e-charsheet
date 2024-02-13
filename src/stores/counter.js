@@ -1,7 +1,10 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
+import { uploadString, getDownloadURL } from "firebase/storage";
+import { storage } from "@/components/firebase/firebase.js"
+import { auth } from "@/components/firebase/firebase.js"
 
-export const useCounterStore = defineStore('counter', () => {
+export const useCounterStore = defineStore("counter", () => {
   const mainInfo = ref([
     { id: 1, name: 'Клан', value: 'lorem'},
     { id: 2, name: 'Хроника', value: 'lorem'},
@@ -64,6 +67,18 @@ const commons = ref([
   { id: 4, name: 'Человечность', value: 10},
 ]);
 
+const common = ref(
+  {
+    health : 6,
+    maxHealth : 10,
+    will: 7,
+    maxWill: 10,
+    humanity: 8,
+    maxHumanity: 10,
+    hunger: 5,
+  },
+);
+
 const isEdit = ref(false)
 
 const save = () => {
@@ -78,5 +93,23 @@ const edit = () => {
   }
 }
 
-  return { mainInfo, attributes, abilities, commons, isEdit, edit, save }
+async function saveJSON(jsonData) {
+  const storageRef = ref(storage, `users/${auth.currentUser.uid}/data.json`);
+  try {
+    await uploadString(storageRef, JSON.stringify(jsonData), "raw");
+    console.log("JSON uploaded successfully");
+    const downloadURL = await getDownloadURL(storageRef);
+    console.log("JSON download URL:", downloadURL);
+  } catch (error) {
+    console.error("Error uploading JSON:", error);
+  }
+}
+
+// const currentUser = ref(null);
+
+// function setUser(user){
+//   currentUser.value = user;
+// }
+
+  return { mainInfo, attributes, abilities, commons, common, isEdit, edit, save, saveJSON, }
 })
