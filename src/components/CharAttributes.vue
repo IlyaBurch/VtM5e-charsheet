@@ -1,34 +1,45 @@
 <template>
-    <div v-if="isEditing">
+
+    <div v-if="store.isEdit" class="attribute__li">
         <p>{{ props.name }}</p>
         <div>
-            <p>{{ props.value }}</p>
+            <Rating v-model="val">
+                <template #officon>
+                    <img src="@/assets/images/gui-form-checkbox-svgrepo-com.png" height="15" width="15">
+                </template>
+                <template #onicon>
+                    <img src="@/assets/images/_filled_gui-form-checkbox-svgrepo-com.png" height="15" width="15"/>
+                </template>
+            </Rating>
         </div>
     </div>
     <div v-else class="attribute__li">
-        <p>{{ name }}</p>
+        <p>{{ props.name }}</p>
         <div>
-            <InputNumber v-model="val"/>
+            <Rating v-model="val"  readonly :cancel="false" >
+                <template #officon>
+                    <img src="@/assets/images/gui-form-checkbox-svgrepo-com.png" height="15" width="15">
+                </template>
+                <template #onicon>
+                    <img src="@/assets/images/_filled_gui-form-checkbox-svgrepo-com.png" height="15" width="15"/>
+                </template>
+            </Rating>
         </div>
     </div>
 </template>
 
 <script setup>
-import InputNumber from 'primevue/inputnumber';
+import Rating from 'primevue/rating';
+import { useCounterStore } from '@/stores/counter';
+
+const store = useCounterStore()
+
 import { ref } from 'vue';
 
 const props = defineProps(['name','value', 'isEditing'])
 
 let name = ref(props.name);
 let val = defineModel('value')
-// let first = ref(null);
-
-// let currentAttribute = attributes.arrAtributes;
-// let currentNum = 0;
-
-// console.log(currentAttribute)
-
-
 
 </script>
 

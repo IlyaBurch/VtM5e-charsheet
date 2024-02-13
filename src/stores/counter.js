@@ -2,6 +2,18 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useCounterStore = defineStore('counter', () => {
+  const mainInfo = ref([
+    { id: 1, name: 'Клан', value: 'lorem'},
+    { id: 2, name: 'Хроника', value: 'lorem'},
+    { id: 3, name: 'Сир', value: 'lorem'},
+    { id: 4, name: 'Концепция', value: 'lorem'},
+    { id: 5, name: 'Цель', value: 'lorem'},
+    { id: 6, name: 'Прихоть', value: 'lorem'},
+    { id: 7, name: 'Стиль охоты', value: 'lorem'},
+    { id: 8, name: 'Поколение', value: 'lorem'},
+    { id: 9, name: 'Резонанс', value: 'lorem'},
+  ])
+  
   const attributes = ref([
     { id: 1, name : 'strength', ruName: 'Сила', value : 3,},
     { id: 2, name : 'dexterity',ruName: 'Ловкость', value : 2,},
@@ -50,7 +62,21 @@ const commons = ref([
   { id: 2, name: 'Воля', value: 10},
   { id: 3, name: 'Голод', value: 5},
   { id: 4, name: 'Человечность', value: 10},
-  { id: 5, name: 'Резонанс', value: ''},
-])
-  return { attributes, abilities, commons }
+]);
+
+const isEdit = ref(false)
+
+const save = () => {
+  if (isEdit.value === true){
+    isEdit.value = false;
+  }
+}
+
+const edit = () => {
+  if (isEdit.value === false){
+    isEdit.value = true;
+  }
+}
+
+  return { mainInfo, attributes, abilities, commons, isEdit, edit, save }
 })
