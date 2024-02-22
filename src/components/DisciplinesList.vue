@@ -42,6 +42,7 @@ let adding = ref(false);
 let addName = ref('');
 let addValue = ref(null)
 let addId = ref(null);
+const amount = 5;
 
 function addDiscipline(){
     adding.value = true;
