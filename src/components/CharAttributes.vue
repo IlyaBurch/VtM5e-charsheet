@@ -16,7 +16,9 @@
             </Rating>
             
         </div>
-        <Button icon="pi pi-trash" @click="store.removeDiscipline(props.id)"/>
+        <div v-show="isRemovable">
+            <Button icon="pi pi-trash" @click="store.removeDiscipline(props.id)"/>
+        </div>
     </div>
     
     <div v-else class="attribute__li">
