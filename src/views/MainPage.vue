@@ -32,6 +32,14 @@
             </template>
             <AbilityList :abilities="store.abilities"/>
         </Panel>
+
+        <Panel toggleable collapsed>
+            <template #header>
+                <span>Дисциплины</span>
+            </template>
+            <DisciplinesList/>
+        </Panel>
+
     </div>
     </div>
 </template>
@@ -41,11 +49,14 @@ import {useCounterStore} from '@/stores/counter'
 
 import Panel from 'primevue/panel'
 import InputText from 'primevue/inputtext';
+import Button from 'primevue/button';
 
 import AttributesList from '@/components/AttributesList.vue';
 import AbilityList from '@/components/AbilityList.vue';
 import CommonList from '@/components/CommonList.vue';
 import MainInfo from '@/components/MainInfo.vue';
+import DisciplinesList from '@/components/DisciplinesList.vue'
+
 
 const store = useCounterStore();
 

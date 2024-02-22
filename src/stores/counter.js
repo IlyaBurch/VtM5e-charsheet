@@ -79,6 +79,39 @@ const common = ref(
   },
 );
 
+const disciplines = ref([])
+
+// const addDiscipline = (id, name, value) => {
+//   disciplines.value.push({
+//     id : id,
+//     name : name,
+//     value : value,
+//   })
+// }
+
+function addDiscipline(id, name, value) {
+  disciplines.value.push({
+    id : id,
+    name : name,
+    value : value,
+  })
+}
+
+function removeDiscipline(id) {
+  const index = disciplines.value.findIndex(discipline => discipline.id === id);
+  if (index !== -1) {
+    disciplines.value.splice(index, 1);
+  }
+  return;
+}
+
+function removeMethod(id, arr){
+  const index = arr.value.findIndex(method => method.id === id);
+  if (index !== -1) {
+    arr.value.splice(index, 1);
+  }
+  return;
+}
 const isEdit = ref(false)
 
 const save = () => {
@@ -111,5 +144,5 @@ async function saveJSON(jsonData) {
 //   currentUser.value = user;
 // }
 
-  return { mainInfo, attributes, abilities, commons, common, isEdit, edit, save, saveJSON, }
+  return { mainInfo, attributes, abilities, commons, common, disciplines, addDiscipline, isEdit, edit, save, saveJSON, removeDiscipline, removeMethod}
 })

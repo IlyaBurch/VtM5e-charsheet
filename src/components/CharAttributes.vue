@@ -1,6 +1,6 @@
 <template>
 
-    <div v-if="store.isEdit" class="attribute__li">
+    <div v-if="store.isEdit || props.isEditing" class="attribute__li">
         <p>{{ props.name }}</p>
         <div v-if="isNumber">
             <InputNumber v-model="val" showButtons :min="0" :max="10" buttonLayout="horizontal" :inputStyle="{'width' : '50px'}"/>
@@ -14,7 +14,9 @@
                     <img src="@/assets/images/_filled_gui-form-checkbox-svgrepo-com.png" height="15" width="15"/>
                 </template>
             </Rating>
+            
         </div>
+        <Button icon="pi pi-trash" @click="store.removeDiscipline(props.id)"/>
     </div>
     
     <div v-else class="attribute__li">
@@ -40,15 +42,22 @@ import Rating from 'primevue/rating';
 import { useCounterStore } from '@/stores/counter';
 
 import InputNumber from 'primevue/inputnumber';
+import Button from 'primevue/button'
 
 const store = useCounterStore()
 
 import { ref } from 'vue';
 
 const props = defineProps({
+    id : Number,
     name : String,
-    value : Number, 
+    value : Number,
+    objName : String, 
     isEditing : Boolean,
+    isRemovable : {
+        type: Boolean,
+        default: false,
+    },
     isNumber : {
         type: Boolean,
         default: false,
