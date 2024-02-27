@@ -9,6 +9,9 @@ export default defineConfig({
     vue(),
     VitePWA({
       registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true
+      },
       injectRegister: 'auto',
       workbox: {
         cleanupOutdatedCaches: false,
