@@ -12,6 +12,7 @@ export default defineConfig({
       devOptions: {
         enabled: true
       },
+      configPath: './pwa-assets.config.js',
       injectRegister: 'auto',
       workbox: {
         cleanupOutdatedCaches: false,
