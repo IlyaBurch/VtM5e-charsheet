@@ -118,6 +118,7 @@ const save = () => {
   if (isEdit.value === true){
     isEdit.value = false;
   }
+  saveJSON();
 }
 
 const edit = () => {
@@ -126,7 +127,22 @@ const edit = () => {
   }
 }
 
-async function saveJSON(jsonData) {
+const jsonData = ref({
+    mainInfo :  mainInfo,
+
+    attributes : attributes,
+
+
+    abilities : abilities,
+    commons : commons,
+
+    common : common,
+
+
+    disciplines : disciplines,
+})
+
+async function saveJSON() {
   const storageRef = ref(storage, `users/${auth.currentUser.uid}/data.json`);
   try {
     await uploadString(storageRef, JSON.stringify(jsonData), "raw");

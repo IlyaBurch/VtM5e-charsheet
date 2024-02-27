@@ -3,7 +3,9 @@
         <Toolbar>
             <template #start>
                 <Button link>
-                    <img src="@/assets/images/PngItem_1379414_white.png" class="logo"/>
+                    <router-link to="/">
+                        <img src="@/assets/images/PngItem_1379414_white.png" class="logo"/>
+                    </router-link>
                 </Button>
             </template>
             <template #end> 
