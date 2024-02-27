@@ -17,6 +17,8 @@ export default defineConfig({
       manifest: {
         name: 'VtM 5e charsheet',
         short_name: 'vtmm5e', 
+        start_url: '/',
+        background_color: '#ffffff',
         description: "A character sheet for the 5th edition of Vampire: The Masquerade",
         theme_color: '#ffffff',
         icons: [
