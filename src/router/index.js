@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import MainPage from '../views/MainPage.vue'
+import CharPage from '../views/CharPage.vue'
 import LoginPage  from '../views/LoginPage.vue'
 // import {useUserStore} from "../stores/user";
 // const store = useUserStore();
@@ -15,7 +15,7 @@ const router = createRouter({
     {
       path: '/char',
       name: 'char',
-      component: MainPage
+      component: CharPage
     },
     // {
     //   path: '/about',
