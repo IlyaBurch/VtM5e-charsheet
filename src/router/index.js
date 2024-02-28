@@ -1,21 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MainPage from '../views/MainPage.vue'
-import LoginHelper from '@/components/firebase/LoginHelper.vue'
-import { auth } from "@/components/firebase/firebase.js";
+import LoginPage  from '../views/LoginPage.vue'
+// import {useUserStore} from "../stores/user";
+// const store = useUserStore();
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: MainPage
+      path: "/",
+      name: "Main",
+      component: LoginPage
     },
     {
-      path: "/login",
-      name: "Login",
-      component: LoginHelper
-    }
+      path: '/char',
+      name: 'char',
+      component: MainPage
+    },
     // {
     //   path: '/about',
     //   name: 'about',
@@ -27,15 +28,12 @@ const router = createRouter({
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  const currentUser = auth.currentUser;
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth);
-
-  if (requiresAuth && !currentUser) {
-    next("/login");
-  } else {
-    next();
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   if (!store.isLog) {
+//     next("/login");
+//   } else {
+//     next();
+//   }
+// });
 
 export default router

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@firebase/storage": "^0.11.2",
+    "@supabase/supabase-js": "^2.39.7",
     "firebase": "^10.8.0",
     "pinia": "^2.1.7",
     "primeicons": "^6.0.1",
