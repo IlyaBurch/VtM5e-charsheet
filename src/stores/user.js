@@ -42,6 +42,7 @@ export const useUserStore = defineStore("user", () => {
             })
             if (error) throw error;
             if (data) isCreated.value = true;
+            router.push('/char')
         } catch (error) {
             if (error instanceof Error){
                 alert ('Ошибка:' + error.message)

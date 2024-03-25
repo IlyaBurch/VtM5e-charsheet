@@ -1,10 +1,11 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { uploadString, getDownloadURL } from "firebase/storage";
-import { storage } from "@/components/firebase/firebase.js"
-import { auth } from "@/components/firebase/firebase.js"
+import { useUserStore } from "./user";
+import { supabase } from '@/supabase';
 
 export const useCounterStore = defineStore("counter", () => {
+  const user = useUserStore();
+  const charName = ref('Новый персонаж')
   const mainInfo = ref([
     { id: 1, name: 'Клан', value: 'lorem'},
     { id: 2, name: 'Хроника', value: 'lorem'},
@@ -118,7 +119,7 @@ const save = () => {
   if (isEdit.value === true){
     isEdit.value = false;
   }
-  saveJSON();
+
 }
 
 const edit = () => {
@@ -128,6 +129,10 @@ const edit = () => {
 }
 
 const jsonData = ref({
+    id: 1,
+
+    charname: charName,
+
     mainInfo :  mainInfo,
 
     attributes : attributes,
@@ -142,17 +147,37 @@ const jsonData = ref({
     disciplines : disciplines,
 })
 
-async function saveJSON() {
-  const storageRef = ref(storage, `users/${auth.currentUser.uid}/data.json`);
-  try {
-    await uploadString(storageRef, JSON.stringify(jsonData), "raw");
-    console.log("JSON uploaded successfully");
-    const downloadURL = await getDownloadURL(storageRef);
-    console.log("JSON download URL:", downloadURL);
-  } catch (error) {
-    console.error("Error uploading JSON:", error);
+async function uploadJSONToSupabase() {
+  // Get the current user from the Vuex store
+  const store = user.$id;
+
+  // Define the Supabase storage bucket name and path
+  const bucketName = 'chars';
+  const path = `users/${store}/data.json`;
+
+  // Upload the JSON string to Supabase
+  const { error } = await supabase.storage.from(bucketName).upload(path, jsonData.value, {
+    upsert: true,
+    cacheControl: '3600',
+  });
+
+  if (error) {
+    console.error('Error uploading file:', error);
+  } else {
+    console.log('File uploaded successfully!');
   }
 }
+// async function saveJSON() {
+//   const storageRef = ref(storage, `users/${auth.currentUser.uid}/data.json`);
+//   try {
+//     await uploadString(storageRef, JSON.stringify(jsonData), "raw");
+//     console.log("JSON uploaded successfully");
+//     const downloadURL = await getDownloadURL(storageRef);
+//     console.log("JSON download URL:", downloadURL);
+//   } catch (error) {
+//     console.error("Error uploading JSON:", error);
+//   }
+// }
 
 // const currentUser = ref(null);
 
@@ -160,5 +185,5 @@ async function saveJSON() {
 //   currentUser.value = user;
 // }
 
-  return { mainInfo, attributes, abilities, commons, common, disciplines, addDiscipline, isEdit, edit, save, saveJSON, removeDiscipline, removeMethod}
+  return { uploadJSONToSupabase, mainInfo, attributes, abilities, commons, common, disciplines, addDiscipline, isEdit, edit, save, removeDiscipline, removeMethod, charName}
 })

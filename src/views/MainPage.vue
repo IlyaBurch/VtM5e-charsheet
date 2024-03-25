@@ -1,12 +1,11 @@
 <template>
     <h1>Интерактивный лист персонажа для НРИ Vampire: the Masquerade</h1>
-    <Button link label="Авторизоваться">
-        <router-link to="/login"/>
-    </Button>
-    <Button link label="Зарегестрироваться">
-        <router-link to="/register"/>
-    </Button>
-    
+    <router-link to="/login">
+        <Button label="Авторизоваться"/>
+    </router-link>
+    <router-link to="/register">
+        <Button label="Зарегестрироваться"/>
+    </router-link>
 </template>
 
 <script setup>

@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import CharPage from '../views/CharPage.vue'
 import LoginPage  from '../views/LoginPage.vue'
+import MainPage from '@/views/MainPage.vue'
+import RegisterPage from '@/views/RegisterPage.vue'
 // import {useUserStore} from "../stores/user";
 // const store = useUserStore();
 
@@ -10,12 +12,22 @@ const router = createRouter({
     {
       path: "/",
       name: "Main",
-      component: LoginPage
+      component: MainPage
     },
     {
       path: '/char',
       name: 'char',
       component: CharPage
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: LoginPage
+    },
+    {
+      path: '/register',
+      name: 'registration',
+      component: RegisterPage
     },
     // {
     //   path: '/about',

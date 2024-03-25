@@ -53,8 +53,10 @@ import Menu from 'primevue/menu';
 import { ref } from 'vue';
 // import {useCounterStore} from '@/stores/counter'
 import {useUserStore} from '@/stores/user'
+import {useCounterStore} from '@/stores/counter'
 
-const store = useUserStore()
+const store = useUserStore();
+const char = useCounterStore();
 
 const menu = ref()
 const toggle = (event) => {
@@ -91,7 +93,7 @@ const items = ref([
         label: 'Авторизироваться',
         icon: 'pi pi-sign-in',
         route: '/'
-    }
+    },
 ]);
 
 const itemsLogged = ref([
@@ -102,7 +104,15 @@ const itemsLogged = ref([
             store.logOut();
         },
         route: '/'
-    }
+    },
+        {
+        label: 'Создать нового персонажа',
+        icon: 'pi pi-plus',
+        command: () =>{
+            char.isEdit = true;
+        },
+        route: '/char'
+    },
 ])
 </script>
 

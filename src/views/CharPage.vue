@@ -1,11 +1,13 @@
 <template>
     <div>
+        <!-- <Button @click="store.uploadJSONToSupabase" label="Upload"/> -->
+        <Button @click="store.edit" label="Edit"/>
         <div class="card flex justify-content-center">
         <Panel toggleable collapsed>
             <template #header>
                 <div class="flex align-items-center name">
                     <img src="@/assets/images/PngItem_939270.png" class="vtm-logo"/>
-                    <InputText v-if='store.isEdit' size='small' class="input__text" v-model="name"/>
+                    <InputText v-if='store.isEdit' size='small' class="input__text" v-model="store.charName"/>
                     <span v-else class="font-bold">{{name}}</span>
                 </div>
             </template>
