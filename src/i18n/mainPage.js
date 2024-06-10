@@ -1,0 +1,5 @@
+const mainPage = {
+  en: {
+    title : 
+  }
+}
