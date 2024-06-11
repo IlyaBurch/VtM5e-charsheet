@@ -20,6 +20,7 @@
     color: white;
     font-size: 10px;
     height: 75px;
+    width: 100%;
 }
 
 .dp-logo{
