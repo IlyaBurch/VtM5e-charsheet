@@ -70,7 +70,7 @@ const { t } = useI18n({
         text-align: center;
         max-width: fit-content;
         margin: 0 auto;
-        padding-bottom: 10rem;
+        padding-bottom: 5rem;
         padding-top: 3rem;
         padding-left: 4rem;
         padding-right: 4rem;

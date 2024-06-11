@@ -5,17 +5,20 @@ import MainFooter from './components/MainFooter.vue';
 </script>
 
 <template>
-  <MainHeader/>
-  <RouterView class="main"/>
+  <div class="main">
+    <MainHeader/>
+    <RouterView />
+  </div>
   <MainFooter class="footer"/>
 </template>
 
 <style scoped>
 .footer{
-    position: fixed;
-    bottom: 0;
+  margin-top: auto;
 }
 .main{
-  padding-bottom: 75px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 </style>
