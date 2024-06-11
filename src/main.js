@@ -2,6 +2,7 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import PrimeVue from 'primevue/config'
 import 'primevue/resources/themes/aura-dark-noir/theme.css'
 import 'primeicons/primeicons.css'
@@ -20,10 +21,13 @@ const i18n = createI18n({
 })
 
 const app = createApp(App)
+const pinia = createPinia()
 
-app.use(createPinia())
+pinia.use(piniaPluginPersistedstate)
+
 app.use(router)
 app.use(PrimeVue)
 app.use(i18n)
+app.use(pinia)
 
 app.mount('#app')

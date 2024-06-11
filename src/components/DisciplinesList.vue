@@ -20,7 +20,7 @@
     <div v-else>
         
     </div>
-    <CharAttributes v-for="item in attributes" :key="item.id" :id="item.id" :name="item.name" v-model:value="item.value" :isEditing="true" :isRemovable="true" :objName="'disciplines'"/>
+    <CharAttributes v-for="item in props.disciplines" :key="item.id" :id="item.id" :name="item.name" v-model:value="item.value" :isEditing="true" :isRemovable="true" :objName="'disciplines'"/>
 </template>
 
 <script setup>
@@ -32,11 +32,20 @@ import Button from 'primevue/button';
 import Rating from 'primevue/rating';
 import InputText from 'primevue/inputtext';
 
-import {useCounterStore} from '@/stores/counter'
+// import {useCounterStore} from '@/stores/counter'
+import { useCharacterStore } from '@/stores/character';
 
-const store = useCounterStore();
+const store = useCharacterStore();
 
-const attributes = store.disciplines
+const props = defineProps({
+    isEditing : {
+        type: Boolean,
+        default: false
+    },
+    disciplines : Array
+})
+
+const attributes = store.character.disciplines
 
 let adding = ref(false);
 let addName = ref('');

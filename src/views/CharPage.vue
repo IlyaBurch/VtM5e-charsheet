@@ -1,17 +1,18 @@
 <template>
     <div>
         <!-- <Button @click="store.uploadJSONToSupabase" label="Upload"/> -->
-        <Button @click="store.edit" label="Edit"/>
+        <Button v-if="!charStore.isEdit" @click="charStore.edit" label="Edit"/>
+        <Button v-if="charStore.isEdit" @click="charStore.save" label="Save"/>
         <div class="card flex justify-content-center">
         <Panel toggleable collapsed>
             <template #header>
                 <div class="flex align-items-center name">
                     <img src="@/assets/images/PngItem_939270.png" class="vtm-logo"/>
-                    <InputText v-if='store.isEdit' size='small' class="input__text" v-model="store.charName"/>
-                    <span v-else class="font-bold">{{name}}</span>
+                    <InputText v-if='charStore.isEdit' size='small' class="input__text" v-model="charStore.character.charName"/>
+                    <span v-else class="font-bold">{{charStore.character.charName}}</span>
                 </div>
             </template>
-            <MainInfo :mainInfo="store.mainInfo"/>
+            <MainInfo :mainInfo="charStore.character.mainInfo"/>
         </Panel>
 
         <Panel toggleable collapsed>
@@ -25,21 +26,21 @@
             <template #header>
                 Харарктеристики
             </template>
-            <AttributesList :attributes="store.attributes"/>
+            <AttributesList :attributes="charStore.character.attributes"/>
         </Panel>
 
         <Panel toggleable collapsed>
             <template #header>
                 Навыки
             </template>
-            <AbilityList :abilities="store.abilities"/>
+            <AbilityList :abilities="charStore.character.abilities"/>
         </Panel>
 
         <Panel toggleable collapsed>
             <template #header>
                 <span>Дисциплины</span>
             </template>
-            <DisciplinesList/>
+            <DisciplinesList :disciplines="charStore.character.disciplines"/>
         </Panel>
 
     </div>
@@ -48,6 +49,7 @@
 
 <script setup>
 import {useCounterStore} from '@/stores/counter'
+import { useCharacterStore } from '@/stores/character';
 
 import Panel from 'primevue/panel'
 import InputText from 'primevue/inputtext';
@@ -59,10 +61,31 @@ import CommonList from '@/components/CommonList.vue';
 import MainInfo from '@/components/MainInfo.vue';
 import DisciplinesList from '@/components/DisciplinesList.vue'
 
+import { useI18n } from 'vue-i18n'
 
 const store = useCounterStore();
 
+const charStore = useCharacterStore();
+
 const name = 'Головач Лена';
+
+
+
+const { t } = useI18n({
+    inheritLocale: true,
+    messages: {
+        "en": {
+            email: "Email",
+            password: "Password",
+            login: "Enter",
+        },
+        "ru": {
+            email: "Почта",
+            password: "Пароль",
+            login: " Войти",
+        }
+    }
+})
 
 </script>
 

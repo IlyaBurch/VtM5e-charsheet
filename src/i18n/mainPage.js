@@ -1,5 +1,0 @@
-const mainPage = {
-  en: {
-    title : 
-  }
-}
