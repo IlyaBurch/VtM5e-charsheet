@@ -7,6 +7,13 @@ import PrimeVue from 'primevue/config'
 import 'primevue/resources/themes/aura-dark-noir/theme.css'
 import 'primeicons/primeicons.css'
 import { createI18n } from 'vue-i18n'
+import gAuth from 'vue3-google-oauth2';
+
+const gAuthOptions = {
+    clientId: 'your_google_client_id.apps.googleusercontent.com', // Замените на ваш Google Client ID
+    scope: 'profile email',
+    prompt: 'consent',
+};
 
 import App from './App.vue'
 import router from './router'
@@ -29,5 +36,6 @@ app.use(router)
 app.use(PrimeVue)
 app.use(i18n)
 app.use(pinia)
+app.use(gAuth, gAuthOptions);
 
 app.mount('#app')
