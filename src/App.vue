@@ -1,22 +1,22 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import MainHeader from './components/MainHeader.vue';
-import MainFooter from './components/MainFooter.vue';
+<script setup lang="ts">
+import { RouterView } from 'vue-router'
+import MainHeader from './components/MainHeader.vue'
+import MainFooter from './components/MainFooter.vue'
 </script>
 
 <template>
   <div class="main">
-    <MainHeader/>
+    <MainHeader />
     <RouterView />
   </div>
-  <MainFooter class="footer"/>
+  <MainFooter class="footer" />
 </template>
 
 <style scoped>
-.footer{
+.footer {
   margin-top: auto;
 }
-.main{
+.main {
   display: flex;
   flex-direction: column;
   min-height: 100vh;

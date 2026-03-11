@@ -3,27 +3,25 @@ import { VitePWA } from 'vite-plugin-pwa'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
-        enabled: true
+        enabled: false
       },
-      configPath: './pwa-assets.config.js',
       injectRegister: 'auto',
       workbox: {
-        cleanupOutdatedCaches: false,
+        cleanupOutdatedCaches: true,
         globPatterns: ['**/*.{js,css,html,ico,png,svg,json,vue,txt,woff2}']
       },
       manifest: {
         name: 'VtM 5e charsheet',
-        short_name: 'vtmm5e', 
+        short_name: 'vtmm5e',
         start_url: '/',
         background_color: '#ffffff',
-        description: "A character sheet for the 5th edition of Vampire: The Masquerade",
+        description: 'A character sheet for the 5th edition of Vampire: The Masquerade',
         theme_color: '#ffffff',
         icons: [
           {
@@ -46,6 +44,13 @@ export default defineConfig({
       }
     })
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler',
+      },
+    },
+  },
   build: {
     outDir: './dist'
   },

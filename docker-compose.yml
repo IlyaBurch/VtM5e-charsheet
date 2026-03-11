@@ -1,0 +1,25 @@
+services:
+  frontend:
+    image: ghcr.io/${GITHUB_REPOSITORY_LOWER}/frontend:${IMAGE_TAG:-latest}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${FRONTEND_PORT:-80}:80"
+    networks:
+      - app-network
+    restart: unless-stopped
+
+  # backend:  # раскомментировать когда образ будет готов
+  #   image: ${BACKEND_IMAGE}
+  #   expose:
+  #     - "3000"
+  #   env_file:
+  #     - .env.backend
+  #   networks:
+  #     - app-network
+  #   restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge
