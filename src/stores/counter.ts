@@ -1,7 +1,5 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { useUserStore } from './user'
-import { supabase } from '@/supabase'
 import type {
   MainInfoItem,
   Attribute,
@@ -12,8 +10,6 @@ import type {
 } from '@/types'
 
 export const useCounterStore = defineStore('counter', () => {
-  const user = useUserStore()
-
   const charName = ref('Новый персонаж')
 
   const mainInfo = ref<MainInfoItem[]>([
@@ -121,38 +117,7 @@ export const useCounterStore = defineStore('counter', () => {
     }
   }
 
-  async function uploadJSONToSupabase(): Promise<void> {
-    const store = user.$id
-    const bucketName = 'chars'
-    const path = `users/${store}/data.json`
-
-    const jsonData = {
-      id: 1,
-      charname: charName.value,
-      mainInfo: mainInfo.value,
-      attributes: attributes.value,
-      abilities: abilities.value,
-      commons: commons.value,
-      common: common.value,
-      disciplines: disciplines.value,
-    }
-
-    const { error } = await supabase.storage
-      .from(bucketName)
-      .upload(path, JSON.stringify(jsonData), {
-        upsert: true,
-        cacheControl: '3600',
-      })
-
-    if (error) {
-      console.error('Error uploading file:', error)
-    } else {
-      console.log('File uploaded successfully!')
-    }
-  }
-
   return {
-    uploadJSONToSupabase,
     mainInfo,
     attributes,
     abilities,

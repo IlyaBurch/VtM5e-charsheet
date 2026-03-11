@@ -1,12 +1,15 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { supabase } from '@/supabase'
 import { useRouter } from 'vue-router'
-import type { AuthResponse } from '@supabase/supabase-js'
+
+export interface UserData {
+  id: string
+  email: string
+}
 
 export const useUserStore = defineStore('user', () => {
   const loading = ref(false)
-  const user = ref<AuthResponse['data'] | null>(null)
+  const user = ref<UserData | null>(null)
   const email = ref('')
   const password = ref('')
   const isLog = ref(false)
@@ -14,55 +17,31 @@ export const useUserStore = defineStore('user', () => {
   const router = useRouter()
 
   const handleLogin = async (): Promise<void> => {
+    // TODO: implement with custom backend
+    loading.value = true
     try {
-      loading.value = true
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: email.value,
-        password: password.value,
-      })
-      if (error) throw error
-      user.value = data
-      isLog.value = true
-      router.push('/char')
-    } catch (error) {
-      if (error instanceof Error) {
-        alert(error.message)
-      }
+      await router.push('/char')
     } finally {
       loading.value = false
     }
   }
 
   const createNewUser = async (): Promise<void> => {
+    // TODO: implement with custom backend
+    loading.value = true
     try {
-      loading.value = true
-      const { data, error } = await supabase.auth.signUp({
-        email: email.value,
-        password: password.value,
-      })
-      if (error) throw error
-      if (data) isCreated.value = true
-      router.push('/char')
-    } catch (error) {
-      if (error instanceof Error) {
-        alert('Ошибка:' + error.message)
-      }
+      await router.push('/char')
     } finally {
       loading.value = false
     }
   }
 
   const logOut = async (): Promise<void> => {
+    // TODO: implement with custom backend
+    loading.value = true
     try {
-      loading.value = true
-      const { error } = await supabase.auth.signOut()
-      if (error) throw error
       user.value = null
       isLog.value = false
-    } catch (error) {
-      if (error instanceof Error) {
-        alert('Ошибка:' + error.message)
-      }
     } finally {
       loading.value = false
     }
