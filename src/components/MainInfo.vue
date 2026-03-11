@@ -1,18 +1,21 @@
 <template>
-    <div>
-        <TextAttributes v-for="item in mainInfo.mainInfo" :key="item.id" :name="item.name" v-model:value="item.value"/>
-    </div>
+  <div>
+    <TextAttributes
+      v-for="item in props.mainInfo"
+      :key="item.id"
+      :name="item.name"
+      v-model:value="item.value"
+    />
+  </div>
 </template>
 
-<script setup>
-import TextAttributes from './TextAttributes.vue';
+<script setup lang="ts">
+import TextAttributes from './TextAttributes.vue'
+import type { MainInfoItem } from '@/types'
 
-const mainInfo = defineProps({
-    mainInfo: Object
-});
-
+const props = defineProps<{
+  mainInfo: MainInfoItem[]
+}>()
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

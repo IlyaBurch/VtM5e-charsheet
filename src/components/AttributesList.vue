@@ -1,18 +1,21 @@
 <template>
-    <div>
-        <CharAttributes v-for="item in attributes.attributes" :key="item.id" :name="item.ruName" v-model:value="item.value"/>
-    </div>
+  <div>
+    <CharAttributes
+      v-for="item in props.attributes"
+      :key="item.id"
+      :name="item.ruName"
+      v-model:value="item.value"
+    />
+  </div>
 </template>
 
-<script setup>
-import CharAttributes from './CharAttributes.vue';
+<script setup lang="ts">
+import CharAttributes from './CharAttributes.vue'
+import type { Attribute } from '@/types'
 
-const attributes = defineProps({
-    attributes: Object
-});
-
+const props = defineProps<{
+  attributes: Attribute[]
+}>()
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
