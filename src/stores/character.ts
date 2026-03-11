@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import type { Character, Discipline } from '@/types'
 
+
 export const useCharacterStore = defineStore(
   'character',
   () => {
@@ -117,6 +118,7 @@ export const useCharacterStore = defineStore(
       notes: '',
     })
 
+    const characterId = ref<number | null>(null)
     const isEdit = ref(false)
 
     function addDiscipline(id: number, name: string, value: number): void {
@@ -155,6 +157,7 @@ export const useCharacterStore = defineStore(
 
     return {
       character,
+      characterId,
       isEdit,
       addDiscipline,
       removeDiscipline,

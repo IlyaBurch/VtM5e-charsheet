@@ -7,6 +7,8 @@ import PrimeVue from 'primevue/config'
 import 'primevue/resources/themes/aura-dark-noir/theme.css'
 import 'primeicons/primeicons.css'
 import { createI18n } from 'vue-i18n'
+import { PiniaColada } from '@pinia/colada'
+import Ripple from 'primevue/ripple'
 
 import App from './App.vue'
 import router from './router'
@@ -22,9 +24,11 @@ const pinia = createPinia()
 
 pinia.use(piniaPluginPersistedstate)
 
-app.use(router)
-app.use(PrimeVue)
-app.use(i18n)
 app.use(pinia)
+app.use(PiniaColada)
+app.use(router)
+app.use(PrimeVue, { ripple: true })
+app.directive('ripple', Ripple)
+app.use(i18n)
 
 app.mount('#app')

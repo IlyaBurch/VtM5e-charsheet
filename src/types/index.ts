@@ -64,6 +64,31 @@ export interface Character {
   notes: string
 }
 
+export interface CharacterPayload {
+  id?: number
+  userId: string
+  charname: string
+  mainInfo: MainInfoItem[]
+  attributes: Attribute[]
+  abilities: Ability[]
+  commons: CommonItem[]
+  common: Common
+  disciplines: Discipline[]
+}
+
+export interface AuthCredentials {
+  email: string
+  password: string
+}
+
+export interface AuthResponse {
+  token: string
+  user: {
+    id: string
+    email: string
+  }
+}
+
 export interface MenuItem {
   label: string
   icon: string
