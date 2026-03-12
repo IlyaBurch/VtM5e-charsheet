@@ -1,10 +1,16 @@
 <template>
-  <div class="header">
+  <div class="mb-2.5">
+    <div
+      v-if="isBeta"
+      class="bg-red-700 text-white text-center font-bold text-base tracking-[0.05em] py-1.5"
+    >
+      ⚠ БЕТА-ВЕРСИЯ — возможны ошибки и нестабильная работа
+    </div>
     <Toolbar>
       <template #start>
         <Button link>
           <router-link to="/">
-            <img src="@/assets/images/PngItem_1379414_white.png" class="logo" />
+            <img src="@/assets/images/PngItem_1379414_white.png" class="w-25" />
           </router-link>
         </Button>
       </template>
@@ -56,11 +62,11 @@ import Button from 'primevue/button'
 import Menu from 'primevue/menu'
 
 import { useUserStore } from '@/stores/user'
-import { useCounterStore } from '@/stores/counter'
 import type { MenuItem } from '@/types'
 
 const store = useUserStore()
-const char = useCounterStore()
+
+const isBeta = import.meta.env.VITE_IS_BETA === 'true'
 
 const menu = ref<InstanceType<typeof Menu> | null>(null)
 
@@ -69,38 +75,19 @@ const toggle = (event: Event): void => {
 }
 
 const items = ref<MenuItem[]>([
-  {
-    label: 'Авторизироваться',
-    icon: 'pi pi-sign-in',
-    route: '/',
-  },
+  { label: 'Авторизироваться', icon: 'pi pi-sign-in', route: '/login' },
+  { label: 'Зарегистрироваться', icon: 'pi pi-user-plus', route: '/register' }
 ])
 
 const itemsLogged = ref<MenuItem[]>([
   {
-    label: 'Выйти из профиля',
+    label: 'Выйти',
     icon: 'pi pi-sign-out',
     command: () => {
       store.logOut()
     },
-    route: '/',
+    route: '/'
   },
-  {
-    label: 'Создать нового персонажа',
-    icon: 'pi pi-plus',
-    command: () => {
-      char.isEdit = true
-    },
-    route: '/char',
-  },
+  { label: 'Создать персонажа', icon: 'pi pi-plus', route: '/new' }
 ])
 </script>
-
-<style scoped>
-.logo {
-  width: 100px;
-}
-.header {
-  margin-bottom: 10px;
-}
-</style>

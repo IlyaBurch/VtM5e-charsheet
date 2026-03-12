@@ -1,39 +1,31 @@
 <template>
-  <div class="login__wrappper">
+  <div class="grid place-items-center">
     <h2>Регистрация</h2>
-    <div class="login__inputs">
+    <div class="grid gap-4 pb-4">
       <label for="email">{{ t('email') }}</label>
-      <InputText type="email" v-model="store.email" />
+      <InputText type="email" v-model="email" />
       <label for="password">{{ t('password') }}</label>
-      <Password v-model="store.password" toggle-mask />
+      <Password v-model="password" toggle-mask />
     </div>
-    <Button @click="store.createNewUser" :label="t('register')" />
+    <Button @click="handleRegister" :label="t('register')" :loading="asyncStatus === 'loading'" />
   </div>
 </template>
 
-<style scoped lang="scss">
-.login {
-  &__wrappper {
-    display: grid;
-    place-items: center;
-  }
-  &__inputs {
-    display: grid;
-    gap: 1rem;
-    padding-bottom: 1rem;
-  }
-}
-</style>
-
 <script setup lang="ts">
-import { useUserStore } from '@/stores/user'
+import { ref } from 'vue'
+import { useRegisterMutation } from '@/composables/useAuth'
 import { useI18n } from 'vue-i18n'
 
 import InputText from 'primevue/inputtext'
 import Password from 'primevue/password'
 import Button from 'primevue/button'
 
-const store = useUserStore()
+const email = ref('')
+const password = ref('')
+
+const { mutate, asyncStatus } = useRegisterMutation()
+
+const handleRegister = () => mutate({ email: email.value, password: password.value })
 
 const { t } = useI18n({
   inheritLocale: true,

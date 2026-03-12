@@ -1,4 +1,5 @@
 import { useQuery, useMutation } from '@pinia/colada'
+import { useRouter } from 'vue-router'
 import {
   fetchCharacters,
   fetchCharacter,
@@ -6,50 +7,44 @@ import {
   updateCharacter,
 } from '@/services/characters'
 import { useCharacterStore } from '@/stores/character'
-import { useUserStore } from '@/stores/user'
-import type { CharacterPayload } from '@/types'
+import type { CharacterListItem, CharacterResponse, CharacterPayload } from '@/types'
 
 export function useCharactersQuery() {
   return useQuery({
     key: () => ['characters'],
-    query: () => fetchCharacters(),
+    query: (): Promise<CharacterListItem[]> => fetchCharacters(),
   })
 }
 
 export function useCharacterQuery(id: number) {
   return useQuery({
     key: () => ['character', id],
-    query: () => fetchCharacter(id),
+    query: (): Promise<CharacterResponse> => fetchCharacter(id),
   })
 }
 
 export function useSaveCharacter() {
   const characterStore = useCharacterStore()
+  const router = useRouter()
 
   return useMutation({
-    mutation: (data: CharacterPayload): Promise<CharacterPayload> =>
-      data.id ? updateCharacter(data.id, data) : createCharacter(data),
-    onSuccess(data) {
-      if (data.id) {
-        characterStore.characterId = data.id
-      }
+    mutation: (payload: CharacterPayload): Promise<CharacterResponse> => {
+      const id = characterStore.characterId
+      return id ? updateCharacter(id, payload) : createCharacter(payload)
+    },
+    onSuccess(data: CharacterResponse) {
+      const isNew = !characterStore.characterId
+      characterStore.characterId = data.id
+      if (isNew) router.replace(`/${data.id}`)
     },
   })
 }
 
 export function useCharacterPayload(): CharacterPayload {
   const characterStore = useCharacterStore()
-  const userStore = useUserStore()
 
   return {
-    id: characterStore.characterId ?? undefined,
-    userId: userStore.user?.id ?? '',
-    charname: characterStore.character.charName,
-    mainInfo: characterStore.character.mainInfo,
-    attributes: characterStore.character.attributes,
-    abilities: characterStore.character.abilities,
-    commons: characterStore.character.commons,
-    common: characterStore.character.common,
-    disciplines: characterStore.character.disciplines,
+    name: characterStore.character.charName,
+    data: characterStore.character,
   }
 }

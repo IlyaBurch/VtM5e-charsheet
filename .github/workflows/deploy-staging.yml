@@ -32,6 +32,9 @@ jobs:
         with:
           context: .
           push: true
+          build-args: |
+            VITE_API_URL=https://staging.cainite.ru
+            VITE_IS_BETA=true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:staging
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:staging-${{ github.sha }}

@@ -1,9 +1,6 @@
 services:
   frontend:
     image: ghcr.io/${GITHUB_REPOSITORY_LOWER}/frontend:${IMAGE_TAG:-latest}
-    build:
-      context: .
-      dockerfile: Dockerfile
     ports:
       - "${FRONTEND_PORT:-80}:80"
     networks:

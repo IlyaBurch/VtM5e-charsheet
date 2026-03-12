@@ -9,6 +9,12 @@ COPY package.json pnpm-lock.yaml ./
 RUN pnpm install --frozen-lockfile
 
 COPY . .
+
+ARG VITE_API_URL
+ENV VITE_API_URL=$VITE_API_URL
+ARG VITE_IS_BETA
+ENV VITE_IS_BETA=$VITE_IS_BETA
+
 RUN pnpm run build
 
 # Stage 2: Serve

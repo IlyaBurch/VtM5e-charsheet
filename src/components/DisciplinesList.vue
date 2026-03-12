@@ -1,8 +1,8 @@
 <template>
   <Button label="Добавить новую дисциплину" icon="pi pi-plus" @click="addDiscipline" />
   <div v-if="adding">
-    <div class="attribute__li">
-      <InputText size="small" class="input__text" v-model="addName" />
+    <div class="flex justify-between items-center mt-[13px]">
+      <InputText size="small" class="w-45" v-model="addName" />
       <Rating v-model="addValue" :stars="amount">
         <template #officon>
           <img src="@/assets/images/gui-form-checkbox-svgrepo-com.png" height="15" width="15" />
@@ -16,19 +16,9 @@
         </template>
       </Rating>
     </div>
-    <div class="adding__buttons">
-      <Button
-        label="Сохранить"
-        class="adding__buttons--button"
-        icon="pi pi-save"
-        @click="saveDiscipline"
-      />
-      <Button
-        label="Отменить"
-        class="adding__buttons--button"
-        icon="pi pi-times"
-        @click="discard"
-      />
+    <div class="flex mt-[13px]">
+      <Button label="Сохранить" class="grow" icon="pi pi-save" @click="saveDiscipline" />
+      <Button label="Отменить" class="grow" icon="pi pi-times" @click="discard" />
     </div>
   </div>
   <div v-else></div>
@@ -38,9 +28,7 @@
     :id="item.id"
     :name="item.name"
     v-model:value="item.value"
-    :isEditing="true"
     :isRemovable="true"
-    :objName="'disciplines'"
   />
 </template>
 
@@ -88,22 +76,3 @@ function discard(): void {
   addValue.value = 0
 }
 </script>
-
-<style scoped>
-.input__text {
-  width: 180px;
-}
-.attribute__li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 13px;
-}
-.adding__buttons {
-  display: flex;
-  margin-top: 13px;
-}
-.adding__buttons--button {
-  flex-grow: 1;
-}
-</style>
