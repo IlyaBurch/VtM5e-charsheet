@@ -4,7 +4,7 @@ import { useUserStore } from '@/stores/user'
 const baseURL = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL + '/api' : '/api'
 
 export const apiClient = axios.create({
-  baseURL: baseURL ?? '/api',
+  baseURL: baseURL,
   withCredentials: false,
   headers: {
     Accept: 'application/json',
