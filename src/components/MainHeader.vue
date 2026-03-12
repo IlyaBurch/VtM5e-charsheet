@@ -1,13 +1,16 @@
 <template>
-  <div class="header">
-    <div v-if="isBeta" class="beta-banner">
+  <div class="mb-2.5">
+    <div
+      v-if="isBeta"
+      class="bg-red-700 text-white text-center font-bold text-base tracking-[0.05em] py-1.5"
+    >
       ⚠ БЕТА-ВЕРСИЯ — возможны ошибки и нестабильная работа
     </div>
     <Toolbar>
       <template #start>
         <Button link>
           <router-link to="/">
-            <img src="@/assets/images/PngItem_1379414_white.png" class="logo" />
+            <img src="@/assets/images/PngItem_1379414_white.png" class="w-25" />
           </router-link>
         </Button>
       </template>
@@ -59,11 +62,9 @@ import Button from 'primevue/button'
 import Menu from 'primevue/menu'
 
 import { useUserStore } from '@/stores/user'
-import { useCounterStore } from '@/stores/counter'
 import type { MenuItem } from '@/types'
 
 const store = useUserStore()
-const char = useCounterStore()
 
 const isBeta = import.meta.env.VITE_IS_BETA === 'true'
 
@@ -80,38 +81,13 @@ const items = ref<MenuItem[]>([
 
 const itemsLogged = ref<MenuItem[]>([
   {
-    label: 'Выйти из профиля',
+    label: 'Выйти',
     icon: 'pi pi-sign-out',
     command: () => {
       store.logOut()
     },
     route: '/'
   },
-  {
-    label: 'Создать нового персонажа',
-    icon: 'pi pi-plus',
-    command: () => {
-      char.isEdit = true
-    },
-    route: '/char'
-  }
+  { label: 'Создать персонажа', icon: 'pi pi-plus', route: '/new' }
 ])
 </script>
-
-<style scoped>
-.logo {
-  width: 100px;
-}
-.header {
-  margin-bottom: 10px;
-}
-.beta-banner {
-  background-color: #b22222;
-  color: #fff;
-  text-align: center;
-  font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: 0.05em;
-  padding: 6px 0;
-}
-</style>

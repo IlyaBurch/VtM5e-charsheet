@@ -15,7 +15,7 @@ export function useLoginMutation() {
       localStorage.setItem('token', data.token)
       userStore.user = { id: data.user.id, email: data.user.email }
       userStore.isLog = true
-      router.push('/char')
+      router.push('/characters')
     },
   })
 }
@@ -31,7 +31,7 @@ export function useRegisterMutation() {
       localStorage.setItem('token', data.token)
       userStore.user = { id: data.user.id, email: data.user.email }
       userStore.isLog = true
-      router.push('/char')
+      router.push('/characters')
     },
   })
 }
