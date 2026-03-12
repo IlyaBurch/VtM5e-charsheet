@@ -3,9 +3,17 @@
   <section class="text-center mx-auto pt-12 pb-20 px-16 max-w-2xl">
     <p>{{ t('info') }}</p>
   </section>
-  <RouterLink to="/new" class="grid place-items-center">
-    <Button class="w-60" :label="t('buttons.create')" />
-  </RouterLink>
+  <div class="space-y-4">
+    <RouterLink to="/new" class="grid place-items-center">
+      <Button class="w-60" :label="t('buttons.create')" />
+    </RouterLink>
+    <RouterLink to="/login" class="grid place-items-center">
+      <Button class="w-60" :label="t('buttons.login')" />
+    </RouterLink>
+    <RouterLink to="/register" class="grid place-items-center">
+      <Button class="w-60" :label="t('buttons.register')" />
+    </RouterLink>
+  </div>
 </template>
 
 <script setup lang="ts">
