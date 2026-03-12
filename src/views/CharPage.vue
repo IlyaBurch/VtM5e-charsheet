@@ -1,7 +1,7 @@
 <template>
   <div>
     <Button v-if="!charStore.isEdit" @click="charStore.edit" label="Edit" />
-    <Button v-if="charStore.isEdit" @click="charStore.save" label="Save" />
+    <Button v-if="charStore.isEdit" @click="handleSave" label="Save" :loading="asyncStatus === 'loading'" />
     <div class="card flex justify-content-center">
       <Panel toggleable collapsed>
         <template #header>
@@ -44,6 +44,7 @@
 
 <script setup lang="ts">
 import { useCharacterStore } from '@/stores/character'
+import { useSaveCharacter, useCharacterPayload } from '@/composables/useCharacter'
 
 import Panel from 'primevue/panel'
 import InputText from 'primevue/inputtext'
@@ -56,6 +57,12 @@ import MainInfo from '@/components/MainInfo.vue'
 import DisciplinesList from '@/components/DisciplinesList.vue'
 
 const charStore = useCharacterStore()
+const { mutate: saveCharacter, asyncStatus } = useSaveCharacter()
+
+const handleSave = () => {
+  saveCharacter(useCharacterPayload())
+  charStore.save()
+}
 </script>
 
 <style scoped>

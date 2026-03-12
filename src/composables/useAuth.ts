@@ -30,7 +30,7 @@ export function useRegisterMutation() {
     onSuccess(data) {
       localStorage.setItem('token', data.token)
       userStore.user = { id: data.user.id, email: data.user.email }
-      userStore.isCreated = true
+      userStore.isLog = true
       router.push('/char')
     },
   })
@@ -38,13 +38,14 @@ export function useRegisterMutation() {
 
 export function useLogoutMutation() {
   const userStore = useUserStore()
+  const router = useRouter()
 
   return useMutation({
-    mutation: (): Promise<void> => apiClient.post('/auth/logout').then((r) => r.data),
+    mutation: (): Promise<void> =>
+      apiClient.post('/auth/logout').then((r) => r.data).catch(() => {}),
     onSuccess() {
-      localStorage.removeItem('token')
-      userStore.user = null
-      userStore.isLog = false
+      userStore.logOut()
+      router.push('/login')
     },
   })
 }

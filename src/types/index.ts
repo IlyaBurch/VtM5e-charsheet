@@ -64,16 +64,25 @@ export interface Character {
   notes: string
 }
 
+// API payload for create/update: { name, data }
 export interface CharacterPayload {
-  id?: number
-  userId: string
-  charname: string
-  mainInfo: MainInfoItem[]
-  attributes: Attribute[]
-  abilities: Ability[]
-  commons: CommonItem[]
-  common: Common
-  disciplines: Discipline[]
+  name: string
+  data: Character
+}
+
+// API response for list: GET /characters
+export interface CharacterListItem {
+  id: number
+  name: string
+  updated_at: string
+}
+
+// API response for single character: GET /characters/:id
+export interface CharacterResponse {
+  id: number
+  name: string
+  data: Character
+  updated_at: string
 }
 
 export interface AuthCredentials {
