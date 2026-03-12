@@ -22,7 +22,18 @@
         <p class="font-medium">{{ char.name }}</p>
         <p class="text-xs text-gray-400">{{ formatDate(char.updated_at) }}</p>
       </div>
-      <span class="pi pi-chevron-right text-gray-400" />
+      <div class="flex items-center gap-2">
+        <Button
+          icon="pi pi-trash"
+          text
+          severity="danger"
+          size="small"
+          @click.stop="handleDelete(char.id)"
+          :loading="deleteMutation.asyncStatus.value === 'loading'"
+          aria-label="Удалить"
+        />
+        <span class="pi pi-chevron-right text-gray-400" />
+      </div>
     </div>
   </div>
 </template>
@@ -30,10 +41,15 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import Button from 'primevue/button'
-import { useCharactersQuery } from '@/composables/useCharacter'
+import { useCharactersQuery, useDeleteCharacter } from '@/composables/useCharacter'
 
 const router = useRouter()
 const { data, status } = useCharactersQuery()
+const deleteMutation = useDeleteCharacter()
+
+function handleDelete(id: number) {
+  deleteMutation.mutate(id)
+}
 
 function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('ru-RU', {

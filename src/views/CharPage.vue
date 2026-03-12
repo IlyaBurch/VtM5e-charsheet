@@ -2,11 +2,17 @@
   <div class="flex flex-col w-full max-w-lg mx-auto px-4 pb-8">
     <div v-if="loading" class="text-center py-12 text-gray-400">Загрузка...</div>
     <div v-else-if="loadError" class="text-center py-12 text-red-400">{{ loadError }}</div>
-    <div v-else class="space-y-4">
+    <template v-else>
       <p v-if="!userStore.isLog" class="text-sm text-amber-500/70 text-center py-2">
         Без регистрации изменения будут утеряны при выходе
       </p>
       <div class="flex gap-2 py-3">
+        <Button
+          icon="pi pi-arrow-left"
+          text
+          @click="router.push('/characters')"
+          aria-label="Назад"
+        />
         <Button
           v-if="!charStore.isEdit"
           @click="charStore.edit"
@@ -19,6 +25,15 @@
           label="Сохранить"
           class="grow"
           :loading="asyncStatus === 'loading'"
+        />
+        <Button
+          v-if="charStore.isEdit && charStore.characterId"
+          icon="pi pi-trash"
+          text
+          severity="danger"
+          @click="handleDelete"
+          :loading="deleteStatus === 'loading'"
+          aria-label="Удалить"
         />
       </div>
 
@@ -57,11 +72,7 @@
         <template #header>Дисциплины</template>
         <DisciplinesList :disciplines="charStore.character.disciplines" />
       </Panel>
-      <Button @click="router.push('/characters')" aria-label="Назад" class="w-full">
-        <Button icon="pi pi-arrow-left" class="mr-2" />
-        {{ 'К списку персонажей' }}</Button
-      >
-    </div>
+    </template>
   </div>
 </template>
 
@@ -70,7 +81,7 @@ import { ref, watch, onMounted, onUnmounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useCharacterStore } from '@/stores/character'
 import { useUserStore } from '@/stores/user'
-import { useSaveCharacter, useCharacterPayload } from '@/composables/useCharacter'
+import { useSaveCharacter, useCharacterPayload, useDeleteCharacter } from '@/composables/useCharacter'
 import { fetchCharacter } from '@/services/characters'
 
 import Panel from 'primevue/panel'
@@ -88,6 +99,7 @@ const router = useRouter()
 const charStore = useCharacterStore()
 const userStore = useUserStore()
 const { mutate: saveCharacter, asyncStatus } = useSaveCharacter()
+const { mutate: deleteCharacter, asyncStatus: deleteStatus } = useDeleteCharacter()
 
 const loading = ref(false)
 const loadError = ref<string | null>(null)
@@ -111,6 +123,12 @@ onMounted(async () => {
 const handleSave = () => {
   saveCharacter(useCharacterPayload())
   charStore.save()
+}
+
+const handleDelete = () => {
+  if (charStore.characterId) {
+    deleteCharacter(charStore.characterId)
+  }
 }
 
 let autoSaveInterval: ReturnType<typeof setInterval> | null = null

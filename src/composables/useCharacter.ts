@@ -1,10 +1,11 @@
-import { useQuery, useMutation } from '@pinia/colada'
+import { useQuery, useMutation, useQueryCache } from '@pinia/colada'
 import { useRouter } from 'vue-router'
 import {
   fetchCharacters,
   fetchCharacter,
   createCharacter,
   updateCharacter,
+  deleteCharacter,
 } from '@/services/characters'
 import { useCharacterStore } from '@/stores/character'
 import type { CharacterListItem, CharacterResponse, CharacterPayload } from '@/types'
@@ -36,6 +37,19 @@ export function useSaveCharacter() {
       const isNew = !characterStore.characterId
       characterStore.characterId = data.id
       if (isNew) router.replace(`/${data.id}`)
+    },
+  })
+}
+
+export function useDeleteCharacter() {
+  const router = useRouter()
+  const queryCache = useQueryCache()
+
+  return useMutation({
+    mutation: (id: number): Promise<void> => deleteCharacter(id),
+    onSuccess() {
+      queryCache.invalidateQueries({ key: ['characters'] })
+      router.push('/characters')
     },
   })
 }
