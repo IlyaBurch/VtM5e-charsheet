@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useI18n } from 'vue-i18n'
-import type { Character, Discipline } from '@/types'
+import type { Character, CharacterPayload, Discipline } from '@/types'
 
 
 export const useCharacterStore = defineStore(
@@ -144,15 +144,9 @@ export const useCharacterStore = defineStore(
       isEdit.value = true
     }
 
-    const jsonData = computed(() => ({
-      id: 1,
-      charname: character.value.charName,
-      mainInfo: character.value.mainInfo,
-      attributes: character.value.attributes,
-      abilities: character.value.abilities,
-      commons: character.value.commons,
-      common: character.value.common,
-      disciplines: character.value.disciplines,
+    const jsonData = computed<CharacterPayload>(() => ({
+      name: character.value.charName,
+      data: character.value,
     }))
 
     return {
