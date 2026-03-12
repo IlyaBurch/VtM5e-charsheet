@@ -59,11 +59,9 @@ import Button from 'primevue/button'
 import Menu from 'primevue/menu'
 
 import { useUserStore } from '@/stores/user'
-import { useCharacterStore } from '@/stores/character'
 import type { MenuItem } from '@/types'
 
 const store = useUserStore()
-const char = useCharacterStore()
 
 const isBeta = import.meta.env.VITE_IS_BETA === 'true'
 
@@ -80,20 +78,12 @@ const items = ref<MenuItem[]>([
 
 const itemsLogged = ref<MenuItem[]>([
   {
-    label: 'Выйти из профиля',
+    label: 'Выйти',
     icon: 'pi pi-sign-out',
     command: () => {
       store.logOut()
     },
     route: '/'
-  },
-  {
-    label: 'Создать нового персонажа',
-    icon: 'pi pi-plus',
-    command: () => {
-      char.isEdit = true
-    },
-    route: '/char'
   }
 ])
 </script>

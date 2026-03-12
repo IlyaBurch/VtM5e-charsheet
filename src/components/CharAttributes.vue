@@ -53,9 +53,11 @@ import InputNumber from 'primevue/inputnumber'
 import Button from 'primevue/button'
 
 import { useCharacterStore } from '@/stores/character'
+import { useUserStore } from '@/stores/user'
 import { useSaveCharacter, useCharacterPayload } from '@/composables/useCharacter'
 
 const store = useCharacterStore()
+const userStore = useUserStore()
 const { mutate: save } = useSaveCharacter()
 
 interface Props {
@@ -76,6 +78,7 @@ const amountVal = defineModel<number>('amount', { default: 5 })
 let debounceTimer: ReturnType<typeof setTimeout> | null = null
 
 watch(val, () => {
+  if (!userStore.isLog) return
   if (debounceTimer) clearTimeout(debounceTimer)
   debounceTimer = setTimeout(() => {
     save(useCharacterPayload())

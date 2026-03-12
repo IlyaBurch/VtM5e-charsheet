@@ -1,5 +1,8 @@
 <template>
   <div class="flex flex-col w-full max-w-lg mx-auto px-4 pb-8">
+    <p v-if="!userStore.isLog" class="text-sm text-amber-500/70 text-center py-2">
+      Без регистрации изменения будут утеряны при выходе
+    </p>
     <div class="flex gap-2 py-3">
       <Button v-if="!charStore.isEdit" @click="charStore.edit" label="Редактировать" class="w-full" />
       <Button v-if="charStore.isEdit" @click="handleSave" label="Сохранить" class="w-full" :loading="asyncStatus === 'loading'" />
@@ -46,6 +49,7 @@
 <script setup lang="ts">
 import { watch, onUnmounted } from 'vue'
 import { useCharacterStore } from '@/stores/character'
+import { useUserStore } from '@/stores/user'
 import { useSaveCharacter, useCharacterPayload } from '@/composables/useCharacter'
 
 import Panel from 'primevue/panel'
@@ -59,6 +63,7 @@ import MainInfo from '@/components/MainInfo.vue'
 import DisciplinesList from '@/components/DisciplinesList.vue'
 
 const charStore = useCharacterStore()
+const userStore = useUserStore()
 const { mutate: saveCharacter, asyncStatus } = useSaveCharacter()
 
 const handleSave = () => {
@@ -69,7 +74,7 @@ const handleSave = () => {
 let autoSaveInterval: ReturnType<typeof setInterval> | null = null
 
 watch(() => charStore.isEdit, (editing) => {
-  if (editing) {
+  if (editing && userStore.isLog) {
     autoSaveInterval = setInterval(() => {
       saveCharacter(useCharacterPayload())
     }, 3 * 60 * 1000)

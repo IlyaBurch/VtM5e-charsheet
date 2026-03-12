@@ -15,6 +15,7 @@ export const useUserStore = defineStore(
 
     const logOut = (): void => {
       localStorage.removeItem('token')
+      localStorage.removeItem('character')
       user.value = null
       isLog.value = false
     }
