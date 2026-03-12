@@ -1,6 +1,9 @@
 <template>
   <div class="mb-2.5">
-    <div v-if="isBeta" class="bg-red-700 text-white text-center font-bold text-base tracking-[0.05em] py-1.5">
+    <div
+      v-if="isBeta"
+      class="bg-red-700 text-white text-center font-bold text-base tracking-[0.05em] py-1.5"
+    >
       ⚠ БЕТА-ВЕРСИЯ — возможны ошибки и нестабильная работа
     </div>
     <Toolbar>
@@ -84,6 +87,7 @@ const itemsLogged = ref<MenuItem[]>([
       store.logOut()
     },
     route: '/'
-  }
+  },
+  { label: 'Создать персонажа', icon: 'pi pi-plus', route: '/new' }
 ])
 </script>

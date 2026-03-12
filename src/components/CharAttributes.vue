@@ -1,7 +1,7 @@
 <template>
   <div class="flex justify-between items-center py-1 gap-2">
     <p class="shrink-0">{{ props.name }}</p>
-    <div class="flex items-center gap-2">
+    <div class="flex flex-col items-center gap-2">
       <div v-if="props.isNumber">
         <InputNumber
           v-model="val"
@@ -34,6 +34,7 @@
         :max="10"
         buttonLayout="horizontal"
         :inputStyle="{ width: '40px' }"
+        class="w-full"
       />
       <Button
         v-if="store.isEdit && props.isRemovable"
@@ -67,10 +68,7 @@ interface Props {
   isNumber?: boolean
 }
 
-const props = withDefaults(defineProps<Props>(), {
-  isRemovable: false,
-  isNumber: false,
-})
+const props = withDefaults(defineProps<Props>(), { isRemovable: false, isNumber: false })
 
 const val = defineModel<number>('value')
 const amountVal = defineModel<number>('amount', { default: 5 })

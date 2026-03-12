@@ -1,4 +1,5 @@
 import { useQuery, useMutation } from '@pinia/colada'
+import { useRouter } from 'vue-router'
 import {
   fetchCharacters,
   fetchCharacter,
@@ -24,6 +25,7 @@ export function useCharacterQuery(id: number) {
 
 export function useSaveCharacter() {
   const characterStore = useCharacterStore()
+  const router = useRouter()
 
   return useMutation({
     mutation: (payload: CharacterPayload): Promise<CharacterResponse> => {
@@ -31,7 +33,9 @@ export function useSaveCharacter() {
       return id ? updateCharacter(id, payload) : createCharacter(payload)
     },
     onSuccess(data: CharacterResponse) {
+      const isNew = !characterStore.characterId
       characterStore.characterId = data.id
+      if (isNew) router.replace(`/${data.id}`)
     },
   })
 }
