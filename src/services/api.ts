@@ -1,8 +1,10 @@
 import axios, { type InternalAxiosRequestConfig } from 'axios'
 import { useUserStore } from '@/stores/user'
 
+const baseURL = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL + '/api' : '/api'
+
 export const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_API_URL ?? '/api',
+  baseURL: baseURL ?? '/api',
   withCredentials: false,
   headers: {
     Accept: 'application/json',
