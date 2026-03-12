@@ -1,7 +1,7 @@
 import axios, { type InternalAxiosRequestConfig } from 'axios'
 import { useUserStore } from '@/stores/user'
 
-const baseURL = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL + '/api' : '/api'
+const baseURL = import.meta.env.VITE_API_URL ?? '/api'
 
 export const apiClient = axios.create({
   baseURL: baseURL,
