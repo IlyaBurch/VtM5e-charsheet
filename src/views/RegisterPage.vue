@@ -1,7 +1,7 @@
 <template>
-  <div class="login__wrappper">
+  <div class="grid place-items-center">
     <h2>Регистрация</h2>
-    <div class="login__inputs">
+    <div class="grid gap-4 pb-4">
       <label for="email">{{ t('email') }}</label>
       <InputText type="email" v-model="email" />
       <label for="password">{{ t('password') }}</label>
@@ -10,20 +10,6 @@
     <Button @click="handleRegister" :label="t('register')" :loading="asyncStatus === 'loading'" />
   </div>
 </template>
-
-<style scoped lang="scss">
-.login {
-  &__wrappper {
-    display: grid;
-    place-items: center;
-  }
-  &__inputs {
-    display: grid;
-    gap: 1rem;
-    padding-bottom: 1rem;
-  }
-}
-</style>
 
 <script setup lang="ts">
 import { ref } from 'vue'

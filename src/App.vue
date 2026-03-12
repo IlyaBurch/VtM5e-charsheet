@@ -5,20 +5,9 @@ import MainFooter from './components/MainFooter.vue'
 </script>
 
 <template>
-  <div class="main">
+  <div class="flex flex-col min-h-screen">
     <MainHeader />
     <RouterView />
   </div>
-  <MainFooter class="footer" />
+  <MainFooter class="mt-auto" />
 </template>
-
-<style scoped>
-.footer {
-  margin-top: auto;
-}
-.main {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-</style>

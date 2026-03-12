@@ -1,11 +1,11 @@
 <template>
-  <div v-if="store.isEdit" class="attribute__li">
+  <div v-if="store.isEdit" class="flex justify-between items-center">
     <p>{{ props.name }}</p>
     <div>
-      <InputText size="small" class="input__text" v-model="val" />
+      <InputText size="small" class="w-45" v-model="val" />
     </div>
   </div>
-  <div v-else class="attribute__li">
+  <div v-else class="flex justify-between items-center">
     <p>{{ props.name }}</p>
     <div>
       <p>{{ props.value }}</p>
@@ -15,9 +15,9 @@
 
 <script setup lang="ts">
 import InputText from 'primevue/inputtext'
-import { useCounterStore } from '@/stores/counter'
+import { useCharacterStore } from '@/stores/character'
 
-const store = useCounterStore()
+const store = useCharacterStore()
 
 const props = defineProps<{
   name: string
@@ -27,18 +27,3 @@ const props = defineProps<{
 
 const val = defineModel<string>('value')
 </script>
-
-<style scoped>
-.attribute__li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.card {
-  padding: 0;
-}
-.input__text {
-  width: 180px;
-}
-</style>

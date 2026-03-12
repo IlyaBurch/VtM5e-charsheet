@@ -1,11 +1,11 @@
 <template>
-  <h1 class="main__title">{{ t('title') }}</h1>
-  <section class="main__info">
+  <h1 class="text-center mb-8 text-2xl">{{ t('title') }}</h1>
+  <section class="text-center max-w-fit mx-auto pt-12 pb-20 px-16">
     <p>{{ t('info') }}</p>
     <p>{{ t('dev') }}</p>
   </section>
-  <RouterLink to="/char" class="center">
-    <Button class="main__buttons--button" :label="t('buttons.create')" />
+  <RouterLink to="/char" class="grid place-items-center">
+    <Button class="w-60" :label="t('buttons.create')" />
   </RouterLink>
 </template>
 
@@ -40,34 +40,3 @@ const { t } = useI18n({
   },
 })
 </script>
-
-<style lang="scss" scoped>
-.center {
-  display: grid;
-  place-items: center;
-}
-.main {
-  &__title {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 1.5rem;
-  }
-  &__buttons {
-    display: grid;
-    place-items: center;
-    gap: 1rem;
-    &--button {
-      width: 15rem;
-    }
-  }
-  &__info {
-    text-align: center;
-    max-width: fit-content;
-    margin: 0 auto;
-    padding-bottom: 5rem;
-    padding-top: 3rem;
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
-}
-</style>
