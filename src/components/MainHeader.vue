@@ -72,7 +72,12 @@ const items = ref<MenuItem[]>([
   {
     label: 'Авторизироваться',
     icon: 'pi pi-sign-in',
-    route: '/',
+    route: '/login',
+  },
+  {
+    label: 'Зарегистрироваться',
+    icon: 'pi pi-user-plus',
+    route: '/register',
   },
 ])
 
