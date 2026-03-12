@@ -4,6 +4,7 @@ import LoginPage from '@/views/LoginPage.vue'
 import RegisterPage from '@/views/RegisterPage.vue'
 import CharactersPage from '@/views/CharactersPage.vue'
 import CharPage from '@/views/CharPage.vue'
+import CharacterSheetPage from '@/views/CharacterSheetPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,6 +38,11 @@ const router = createRouter({
       path: '/:id(\\d+)',
       name: 'character',
       component: CharPage,
+    },
+    {
+      path: '/sheet',
+      name: 'sheet',
+      component: CharacterSheetPage,
     },
   ],
 })

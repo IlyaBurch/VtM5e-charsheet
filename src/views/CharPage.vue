@@ -50,7 +50,15 @@
             <span v-else class="font-bold">{{ charStore.character.charName }}</span>
           </div>
         </template>
-        <MainInfo :mainInfo="charStore.character.mainInfo" />
+        <MainInfo :mainInfo="charStore.character.mainInfo.filter(i => i.name !== 'Клан')" />
+      </Panel>
+
+      <Panel toggleable collapsed class="w-full">
+        <template #header>Клан</template>
+        <ClanSelector
+          :modelValue="charStore.character.clan ?? null"
+          @update:modelValue="charStore.setClan($event)"
+        />
       </Panel>
 
       <Panel toggleable collapsed class="w-full">
@@ -93,6 +101,7 @@ import AbilityList from '@/components/AbilityList.vue'
 import CommonList from '@/components/CommonList.vue'
 import MainInfo from '@/components/MainInfo.vue'
 import DisciplinesList from '@/components/DisciplinesList.vue'
+import ClanSelector from '@/components/ClanSelector.vue'
 
 const route = useRoute()
 const router = useRouter()

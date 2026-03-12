@@ -47,6 +47,7 @@ export interface BodyInfoItem {
 
 export interface Character {
   charName: string
+  clan?: string
   mainInfo: MainInfoItem[]
   attributes: Attribute[]
   abilities: Ability[]

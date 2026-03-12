@@ -2,12 +2,13 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import type { Character, CharacterPayload, CharacterResponse, Discipline } from '@/types'
+import { CLANS } from '@/data/clans.data'
 
 function createDefaultCharacter(t: (key: string) => string): Character {
   return {
     charName: 'Новый персонаж',
+    clan: '',
     mainInfo: [
-      { id: 1, name: 'Клан', value: '' },
       { id: 2, name: 'Хроника', value: '' },
       { id: 3, name: 'Сир', value: '' },
       { id: 4, name: 'Концепция', value: '' },
@@ -131,6 +132,18 @@ export const useCharacterStore = defineStore(
       removeMethod(id, character.value.disciplines)
     }
 
+    function setClan(clanId: string): void {
+      character.value.clan = clanId
+      const clan = CLANS.find(c => c.name === clanId)
+      if (clan) {
+        character.value.disciplines = clan.disciplines.map((disc, index) => ({
+          id: index + 1,
+          name: disc.nameRu,
+          value: 0,
+        }))
+      }
+    }
+
     function removeMethod(id: number, arr: Discipline[]): void {
       const index = arr.findIndex((item) => item.id === id)
       if (index !== -1) {
@@ -169,6 +182,7 @@ export const useCharacterStore = defineStore(
       isEdit,
       addDiscipline,
       removeDiscipline,
+      setClan,
       removeMethod,
       save,
       edit,
