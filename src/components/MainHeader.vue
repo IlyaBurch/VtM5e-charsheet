@@ -1,5 +1,8 @@
 <template>
   <div class="header">
+    <div v-if="isBeta" class="beta-banner">
+      ⚠ БЕТА-ВЕРСИЯ — возможны ошибки и нестабильная работа
+    </div>
     <Toolbar>
       <template #start>
         <Button link>
@@ -62,6 +65,8 @@ import type { MenuItem } from '@/types'
 const store = useUserStore()
 const char = useCounterStore()
 
+const isBeta = import.meta.env.VITE_IS_BETA === 'true'
+
 const menu = ref<InstanceType<typeof Menu> | null>(null)
 
 const toggle = (event: Event): void => {
@@ -69,16 +74,8 @@ const toggle = (event: Event): void => {
 }
 
 const items = ref<MenuItem[]>([
-  {
-    label: 'Авторизироваться',
-    icon: 'pi pi-sign-in',
-    route: '/login',
-  },
-  {
-    label: 'Зарегистрироваться',
-    icon: 'pi pi-user-plus',
-    route: '/register',
-  },
+  { label: 'Авторизироваться', icon: 'pi pi-sign-in', route: '/login' },
+  { label: 'Зарегистрироваться', icon: 'pi pi-user-plus', route: '/register' }
 ])
 
 const itemsLogged = ref<MenuItem[]>([
@@ -88,7 +85,7 @@ const itemsLogged = ref<MenuItem[]>([
     command: () => {
       store.logOut()
     },
-    route: '/',
+    route: '/'
   },
   {
     label: 'Создать нового персонажа',
@@ -96,8 +93,8 @@ const itemsLogged = ref<MenuItem[]>([
     command: () => {
       char.isEdit = true
     },
-    route: '/char',
-  },
+    route: '/char'
+  }
 ])
 </script>
 
@@ -107,5 +104,14 @@ const itemsLogged = ref<MenuItem[]>([
 }
 .header {
   margin-bottom: 10px;
+}
+.beta-banner {
+  background-color: #b22222;
+  color: #fff;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  padding: 6px 0;
 }
 </style>
