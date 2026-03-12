@@ -7,12 +7,14 @@
     <RouterLink to="/new" class="grid place-items-center">
       <Button class="w-60" :label="t('buttons.create')" />
     </RouterLink>
-    <RouterLink to="/login" class="grid place-items-center">
-      <Button class="w-60" :label="t('buttons.login')" />
-    </RouterLink>
-    <RouterLink to="/register" class="grid place-items-center">
-      <Button class="w-60" :label="t('buttons.register')" />
-    </RouterLink>
+    <template v-if="!store.isLog">
+      <RouterLink to="/login" class="grid place-items-center">
+        <Button class="w-60" :label="t('buttons.login')" />
+      </RouterLink>
+      <RouterLink to="/register" class="grid place-items-center">
+        <Button class="w-60" :label="t('buttons.register')" />
+      </RouterLink>
+    </template>
   </div>
 </template>
 
@@ -20,6 +22,9 @@
 import Button from 'primevue/button'
 import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { useUserStore } from '@/stores/user'
+
+const store = useUserStore()
 
 const { t } = useI18n({
   inheritLocale: true,
