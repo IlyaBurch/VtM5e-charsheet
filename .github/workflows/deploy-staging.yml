@@ -33,7 +33,7 @@ jobs:
           context: .
           push: true
           build-args: |
-            VITE_API_URL=https://staging.cainite.ru
+            VITE_API_URL=https://staging.cainite.ru/api
             VITE_IS_BETA=true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:staging
