@@ -6,16 +6,22 @@ export interface UserData {
   email: string
 }
 
-export const useUserStore = defineStore('user', () => {
-  const loading = ref(false)
-  const user = ref<UserData | null>(null)
-  const isLog = ref(false)
+export const useUserStore = defineStore(
+  'user',
+  () => {
+    const loading = ref(false)
+    const user = ref<UserData | null>(null)
+    const isLog = ref(false)
 
-  const logOut = (): void => {
-    localStorage.removeItem('token')
-    user.value = null
-    isLog.value = false
-  }
+    const logOut = (): void => {
+      localStorage.removeItem('token')
+      user.value = null
+      isLog.value = false
+    }
 
-  return { loading, user, isLog, logOut }
-})
+    return { loading, user, isLog, logOut }
+  },
+  {
+    persist: true,
+  },
+)
