@@ -46,7 +46,7 @@ function scrollTo(id: string) {
     <div style="display:flex; align-items:center; gap:8px; padding:8px 12px; border-bottom:1px solid var(--b2); flex-shrink:0;">
       <button class="back-btn" @click="router.push('/characters')">Все персонажи</button>
       <span style="flex:1;" />
-      <span style="font-size:8px; color:var(--gold-dim); letter-spacing:1px; border:1px solid var(--b2); padding:3px 8px;">
+      <span style="font-size:11px; color:var(--gold-dim); letter-spacing:1px; border:1px solid var(--b2); padding:3px 8px;">
         ДЕМО-ЛИСТ
       </span>
     </div>
@@ -55,14 +55,14 @@ function scrollTo(id: string) {
     <div class="char-banner" style="border-bottom:1px solid var(--b);">
       <div class="char-banner-top">
         <span class="mb-char-name">{{ char.name }}</span>
-        <span style="font-size:9px; color:var(--gold); border:1px solid var(--gold-dim); padding:3px 8px; letter-spacing:1px; text-transform:uppercase;">
+        <span style="font-size:12px; color:var(--gold); border:1px solid var(--gold-dim); padding:4px 10px; letter-spacing:1px; text-transform:uppercase;">
           {{ char.class }}
         </span>
       </div>
       <div style="display:flex; align-items:baseline; gap:10px; margin-top:8px;">
         <span class="mb-hp-current">{{ char.hp.current }}</span>
         <span class="mb-hp-max">/ {{ char.hp.max }}</span>
-        <span style="font-size:8px; color:var(--lbl); letter-spacing:2px; text-transform:uppercase; margin-left:4px;">ОЗ</span>
+        <span style="font-size:12px; color:var(--lbl); letter-spacing:1px; text-transform:uppercase; margin-left:4px;">ОЗ</span>
       </div>
     </div>
 
@@ -102,7 +102,7 @@ function scrollTo(id: string) {
                 <div style="font-family:var(--font-mb); font-size:13px; color:var(--gold); margin-bottom:4px;">
                   {{ ab.name }}
                 </div>
-                <div style="font-size:11px; color:var(--t2); line-height:1.6;">{{ ab.description }}</div>
+                <div style="font-size:13px; color:var(--t2); line-height:1.6;">{{ ab.description }}</div>
               </div>
             </div>
           </div>
@@ -116,7 +116,7 @@ function scrollTo(id: string) {
           <div v-for="stat in char.stats" :key="stat.name" class="mb-stat-cell">
             <div>
               <div class="mb-stat-mod">{{ stat.modifier }}</div>
-              <div style="font-size:9px; color:var(--lbl); letter-spacing:1px; text-transform:uppercase; margin-top:2px;">
+              <div style="font-size:12px; color:var(--lbl); letter-spacing:1px; text-transform:uppercase; margin-top:2px;">
                 {{ stat.name }}
               </div>
             </div>
@@ -136,7 +136,7 @@ function scrollTo(id: string) {
           >
             <div>
               <div style="font-family:var(--font-mb); font-size:13px; color:var(--t1);">{{ weapon.name }}</div>
-              <div v-if="weapon.special" style="font-size:9px; color:var(--t3); letter-spacing:1px; margin-top:2px;">
+              <div v-if="weapon.special" style="font-size:12px; color:var(--t3); letter-spacing:1px; margin-top:2px;">
                 {{ weapon.special }}
               </div>
             </div>
@@ -146,18 +146,18 @@ function scrollTo(id: string) {
           <!-- Armor -->
           <div style="background:var(--bg3); padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
             <div>
-              <div style="font-size:8px; color:var(--lbl); letter-spacing:2px; text-transform:uppercase; margin-bottom:4px;">Броня</div>
+              <div style="font-size:11px; color:var(--lbl); letter-spacing:1px; text-transform:uppercase; margin-bottom:4px;">Броня</div>
               <div style="font-family:var(--font-mb); font-size:13px; color:var(--t1);">{{ char.armor.name }}</div>
             </div>
             <div>
-              <div style="font-size:8px; color:var(--lbl); letter-spacing:1px; text-transform:uppercase; margin-bottom:2px; text-align:right;">Снижение</div>
+              <div style="font-size:11px; color:var(--lbl); letter-spacing:1px; text-transform:uppercase; margin-bottom:2px; text-align:right;">Снижение</div>
               <div style="font-family:var(--font-mb); font-size:18px; color:var(--gold);">{{ char.armor.reduction }}</div>
             </div>
           </div>
 
           <!-- Suffering -->
           <div style="margin-top:8px;">
-            <div style="font-size:8px; color:var(--lbl); letter-spacing:2px; text-transform:uppercase; margin-bottom:8px;">Страдания</div>
+            <div style="font-size:12px; color:var(--lbl); letter-spacing:1px; text-transform:uppercase; margin-bottom:8px;">Страдания</div>
             <div style="display:flex; gap:6px;">
               <div
                 v-for="n in 6"
@@ -181,12 +181,12 @@ function scrollTo(id: string) {
               :key="si"
               style="background:var(--bg3); padding:8px 10px; min-height:44px; display:flex; align-items:center;"
             >
-              <span style="font-size:10px; color:var(--t2);">{{ slot || '' }}</span>
+              <span style="font-size:13px; color:var(--t2);">{{ slot || '' }}</span>
             </div>
           </div>
           <div style="display:flex; align-items:baseline; gap:10px;">
             <span class="mb-silver-val">{{ char.silver }}</span>
-            <span style="font-size:8px; color:var(--lbl); letter-spacing:2px; text-transform:uppercase;">Серебра</span>
+            <span style="font-size:12px; color:var(--lbl); letter-spacing:1px; text-transform:uppercase;">Серебра</span>
           </div>
         </div>
       </div>
@@ -204,7 +204,7 @@ function scrollTo(id: string) {
               @click="toggleOmen(i)"
             >✦</div>
           </div>
-          <div style="font-size:9px; color:var(--t3); margin-top:8px; letter-spacing:1px;">
+          <div style="font-size:12px; color:var(--t3); margin-top:8px; letter-spacing:1px;">
             {{ omensUsed }} / {{ char.omens.total }} использовано
           </div>
         </div>

@@ -125,7 +125,7 @@ function handleReset() {
                 >Забыл пароль?</span>
               </div>
             </div>
-            <div v-if="loginError" style="font-size:10px; color:var(--red); margin-top:8px;">
+            <div v-if="loginError" style="font-size:13px; color:var(--red); margin-top:8px;">
               {{ loginError }}
             </div>
             <button
@@ -194,7 +194,7 @@ function handleReset() {
                 @keyup.enter="handleRegister"
               />
             </div>
-            <div v-if="regError" style="font-size:10px; color:var(--red); margin-top:8px;">
+            <div v-if="regError" style="font-size:13px; color:var(--red); margin-top:8px;">
               {{ regError }}
             </div>
             <button
@@ -244,7 +244,7 @@ function handleReset() {
             </div>
             <div style="margin-top:16px; text-align:center;">
               <span
-                style="font-size:9px; color:var(--t3); cursor:pointer; letter-spacing:1px; text-transform:uppercase;"
+                style="font-size:12px; color:var(--t3); cursor:pointer; letter-spacing:1px; text-transform:uppercase;"
                 @click="mode = 'login'"
               >← Вернуться к входу</span>
             </div>
@@ -254,11 +254,11 @@ function handleReset() {
         <!-- Card footer -->
         <div v-if="mode !== 'reset'" class="auth-card-footer">
           <template v-if="mode === 'login'">
-            <span style="font-size:10px; color:var(--t3);">Нет аккаунта?</span>
+            <span style="font-size:13px; color:var(--t3);">Нет аккаунта?</span>
             <span class="auth-link" @click="mode = 'register'">Зарегистрироваться</span>
           </template>
           <template v-else>
-            <span style="font-size:10px; color:var(--t3);">Уже есть аккаунт?</span>
+            <span style="font-size:13px; color:var(--t3);">Уже есть аккаунт?</span>
             <span class="auth-link" @click="mode = 'login'">Войти</span>
           </template>
         </div>
@@ -344,7 +344,7 @@ function handleReset() {
 .auth-tab {
   flex: 1; padding: 12px;
   font-family: var(--font-body);
-  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
   color: var(--t3); background: transparent; border: none;
   border-bottom: 2px solid transparent;
   cursor: pointer; transition: all 0.15s;
@@ -353,7 +353,7 @@ function handleReset() {
 
 .auth-body { padding: 24px; }
 .auth-field { margin-bottom: 16px; }
-.auth-hint { font-size: 9px; color: var(--t3); letter-spacing: 1px; margin-top: 4px; }
+.auth-hint { font-size: 12px; color: var(--t3); letter-spacing: 1px; margin-top: 4px; }
 
 .auth-reset-title {
   font-family: var(--font-head);
@@ -367,7 +367,7 @@ function handleReset() {
   display: flex; align-items: center; gap: 8px;
 }
 .auth-link {
-  font-size: 10px; color: var(--gold);
+  font-size: 13px; color: var(--gold);
   cursor: pointer; letter-spacing: 1px;
   text-transform: uppercase;
 }

@@ -151,7 +151,7 @@ onUnmounted(() => {
     <div style="display:flex; align-items:center; gap:8px; padding:8px 12px; border-bottom:1px solid var(--b2); flex-shrink:0;">
       <button class="back-btn" @click="router.push('/characters')">Все персонажи</button>
       <div style="flex:1;" />
-      <span v-if="!userStore.isLog" style="font-size:8px; color:var(--gold-dim); letter-spacing:1px;">
+      <span v-if="!userStore.isLog" style="font-size:12px; color:var(--gold-dim); letter-spacing:1px;">
         Изменения не сохранятся без входа
       </span>
       <button
@@ -279,7 +279,7 @@ onUnmounted(() => {
         <div class="section-label">Физические</div>
         <div style="padding:12px 20px; display:flex; flex-direction:column; gap:10px;">
           <div v-for="attr in physicalAttrs" :key="attr.id" style="display:flex; align-items:center; gap:12px;">
-            <span style="font-size:11px; color:var(--t2); width:120px; flex-shrink:0;">{{ attr.ruName }}</span>
+            <span style="font-size:13px; color:var(--t2); width:130px; flex-shrink:0;">{{ attr.ruName }}</span>
             <div class="dots-row">
               <span
                 v-for="i in 5" :key="i"
@@ -292,7 +292,7 @@ onUnmounted(() => {
         <div class="section-label">Социальные</div>
         <div style="padding:12px 20px; display:flex; flex-direction:column; gap:10px;">
           <div v-for="attr in socialAttrs" :key="attr.id" style="display:flex; align-items:center; gap:12px;">
-            <span style="font-size:11px; color:var(--t2); width:120px; flex-shrink:0;">{{ attr.ruName }}</span>
+            <span style="font-size:13px; color:var(--t2); width:130px; flex-shrink:0;">{{ attr.ruName }}</span>
             <div class="dots-row">
               <span
                 v-for="i in 5" :key="i"
@@ -305,7 +305,7 @@ onUnmounted(() => {
         <div class="section-label">Ментальные</div>
         <div style="padding:12px 20px; display:flex; flex-direction:column; gap:10px;">
           <div v-for="attr in mentalAttrs" :key="attr.id" style="display:flex; align-items:center; gap:12px;">
-            <span style="font-size:11px; color:var(--t2); width:120px; flex-shrink:0;">{{ attr.ruName }}</span>
+            <span style="font-size:13px; color:var(--t2); width:130px; flex-shrink:0;">{{ attr.ruName }}</span>
             <div class="dots-row">
               <span
                 v-for="i in 5" :key="i"
@@ -324,7 +324,7 @@ onUnmounted(() => {
             <div class="section-label">Физические</div>
             <div style="padding:12px 16px; display:flex; flex-direction:column; gap:8px;">
               <div v-for="ab in physicalSkills" :key="ab.id" style="display:flex; align-items:center; gap:8px;">
-                <span style="font-size:10px; color:var(--t2); flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ ab.ruName }}</span>
+                <span style="font-size:12px; color:var(--t2); flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ ab.ruName }}</span>
                 <div class="dots-row">
                   <span
                     v-for="i in 5" :key="i"
@@ -338,7 +338,7 @@ onUnmounted(() => {
             <div class="section-label">Социальные</div>
             <div style="padding:12px 16px; display:flex; flex-direction:column; gap:8px;">
               <div v-for="ab in socialSkills" :key="ab.id" style="display:flex; align-items:center; gap:8px;">
-                <span style="font-size:10px; color:var(--t2); flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ ab.ruName }}</span>
+                <span style="font-size:12px; color:var(--t2); flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ ab.ruName }}</span>
                 <div class="dots-row">
                   <span
                     v-for="i in 5" :key="i"
@@ -354,7 +354,7 @@ onUnmounted(() => {
             <div class="section-label">Ментальные</div>
             <div style="padding:12px 16px; display:flex; flex-direction:column; gap:8px;">
               <div v-for="ab in mentalSkills" :key="ab.id" style="display:flex; align-items:center; gap:8px;">
-                <span style="font-size:10px; color:var(--t2); flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ ab.ruName }}</span>
+                <span style="font-size:12px; color:var(--t2); flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">{{ ab.ruName }}</span>
                 <div class="dots-row">
                   <span
                     v-for="i in 5" :key="i"
@@ -391,7 +391,7 @@ onUnmounted(() => {
           </div>
           <div
             v-if="!character.disciplines.length"
-            style="font-size:11px; color:var(--t3); letter-spacing:1px; padding:8px 0;"
+            style="font-size:13px; color:var(--t3); letter-spacing:1px; padding:8px 0;"
           >
             Выберите клан для автозаполнения дисциплин
           </div>
@@ -399,7 +399,7 @@ onUnmounted(() => {
 
         <div class="section-label">Сила крови</div>
         <div style="padding:12px 20px; display:flex; align-items:center; gap:12px;">
-          <span style="font-size:11px; color:var(--t2); width:120px;">Потенциал</span>
+          <span style="font-size:13px; color:var(--t2); width:130px;">Потенциал</span>
           <div class="dots-row">
             <span
               v-for="i in 10" :key="i"
@@ -416,14 +416,14 @@ onUnmounted(() => {
             :key="merit.id"
             style="display:flex; align-items:center; justify-content:space-between;"
           >
-            <span style="font-size:11px; color:var(--t2);">{{ merit.name }}</span>
+            <span style="font-size:13px; color:var(--t2);">{{ merit.name }}</span>
             <div class="dots-row">
               <span v-for="i in merit.value" :key="i" class="dot filled" />
             </div>
           </div>
           <div
             v-if="!character.advantages.length"
-            style="font-size:11px; color:var(--t3); letter-spacing:1px;"
+            style="font-size:13px; color:var(--t3); letter-spacing:1px;"
           >Нет достоинств</div>
         </div>
 
@@ -463,7 +463,7 @@ onUnmounted(() => {
         <div class="section-label">Здоровье</div>
         <div style="padding:12px 20px;">
           <div style="display:flex; gap:6px; margin-bottom:8px; align-items:center;">
-            <span style="font-size:9px; color:var(--lbl); width:80px; letter-spacing:1px; text-transform:uppercase;">Макс.</span>
+            <span style="font-size:12px; color:var(--lbl); width:80px; letter-spacing:1px; text-transform:uppercase;">Макс.</span>
             <input
               v-if="charStore.isEdit"
               v-model.number="character.common.maxHealth"

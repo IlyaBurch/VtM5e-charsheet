@@ -60,35 +60,35 @@ const userStore = useUserStore()
       <!-- Right column — preview -->
       <div class="home-preview">
         <div class="home-preview-header">
-          <span style="font-size:9px; color:var(--t3);">Пример листа</span>
+          <span style="font-size:12px; color:var(--t3);">Пример листа</span>
           <span class="home-preview-badge">VtM 5e</span>
         </div>
         <div style="padding:16px;">
           <div style="font-family:var(--font-char); font-size:24px; color:#b8a080; font-style:italic; font-weight:300;">
             Мирослава Сорокина
           </div>
-          <div style="font-size:8px; color:var(--gold-dim); letter-spacing:1px; margin-top:2px;">
+          <div style="font-size:11px; color:var(--gold-dim); letter-spacing:1px; margin-top:2px;">
             8-е поколение
           </div>
           <span class="clan-badge" style="margin-top:6px; display:inline-block;">Тореадор</span>
 
           <div style="margin-top:14px;">
-            <div style="font-size:8px; color:var(--lbl); letter-spacing:2px; text-transform:uppercase; margin-bottom:6px;">Атрибуты</div>
+            <div style="font-size:11px; color:var(--lbl); letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Атрибуты</div>
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
               <div v-for="attr in [['Сила','●●○○○'],['Ловкость','●●●○○'],['Обаяние','●●●●○'],['Интеллект','●●●○○']]" :key="attr[0]"
                 style="background:var(--bg3); padding:8px;">
-                <div style="font-size:8px; color:var(--lbl); letter-spacing:1px; text-transform:uppercase;">{{ attr[0] }}</div>
-                <div style="font-size:12px; color:var(--gold); letter-spacing:2px; margin-top:2px;">{{ attr[1] }}</div>
+                <div style="font-size:10px; color:var(--lbl); letter-spacing:1px; text-transform:uppercase;">{{ attr[0] }}</div>
+                <div style="font-size:13px; color:var(--gold); letter-spacing:2px; margin-top:2px;">{{ attr[1] }}</div>
               </div>
             </div>
           </div>
 
           <div style="margin-top:14px;">
-            <div style="font-size:8px; color:var(--lbl); letter-spacing:2px; text-transform:uppercase; margin-bottom:6px;">Дисциплины</div>
+            <div style="font-size:11px; color:var(--lbl); letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Дисциплины</div>
             <div v-for="d in [['Присутствие','●●●○○'],['Доминирование','●●○○○']]" :key="d[0]"
-              style="display:flex; justify-content:space-between; padding:4px 0; border-bottom:1px solid var(--b2);">
-              <span style="font-size:11px; color:var(--t2);">{{ d[0] }}</span>
-              <span style="font-size:11px; color:var(--gold); letter-spacing:2px;">{{ d[1] }}</span>
+              style="display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid var(--b2);">
+              <span style="font-size:13px; color:var(--t2);">{{ d[0] }}</span>
+              <span style="font-size:13px; color:var(--gold); letter-spacing:2px;">{{ d[1] }}</span>
             </div>
           </div>
         </div>
@@ -122,7 +122,7 @@ const userStore = useUserStore()
     <!-- Disclaimer bar -->
     <div class="home-disclaimer-bar">
       <span class="home-disclaimer-dot" />
-      <span style="font-size:8px; color:#6a1a1a; letter-spacing:1px;">
+      <span style="font-size:11px; color:#6a1a1a; letter-spacing:1px;">
         Cainite — неофициальный фан-сайт. Не является официальным материалом World of Darkness.
       </span>
     </div>
@@ -244,7 +244,7 @@ const userStore = useUserStore()
   flex-shrink: 0;
 }
 .home-eyebrow-text {
-  font-size: 9px;
+  font-size: 12px;
   color: #ad0013;
   letter-spacing: 4px;
   text-transform: uppercase;
@@ -267,7 +267,7 @@ const userStore = useUserStore()
   line-height: 1;
 }
 .home-tagline {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--t3);
   border-left: 1px solid var(--b);
   padding-left: 14px;
@@ -284,7 +284,7 @@ const userStore = useUserStore()
   color: #fff;
   border: none;
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 3px;
   text-transform: uppercase;
   padding: 12px 24px;
@@ -298,7 +298,7 @@ const userStore = useUserStore()
   border-left: none;
   color: var(--t3);
   font-family: var(--font-body);
-  font-size: 10px;
+  font-size: 13px;
   letter-spacing: 2px;
   text-transform: uppercase;
   padding: 12px 20px;
@@ -323,7 +323,7 @@ const userStore = useUserStore()
   border-bottom: 1px solid var(--b);
 }
 .home-preview-badge {
-  font-size: 8px;
+  font-size: 11px;
   color: var(--red);
   border: 1px solid var(--red);
   padding: 2px 6px;

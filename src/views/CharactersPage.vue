@@ -32,7 +32,7 @@ function formatDate(iso: string): string {
     </div>
 
     <!-- Loading -->
-    <div v-if="status === 'pending'" style="padding:40px 20px; text-align:center; color:var(--t3); font-size:11px; letter-spacing:2px;">
+    <div v-if="status === 'pending'" style="padding:40px 20px; text-align:center; color:var(--t3); font-size:13px; letter-spacing:1px;">
       ЗАГРУЗКА...
     </div>
 
@@ -41,7 +41,7 @@ function formatDate(iso: string): string {
       <div style="font-family:var(--font-head); font-size:28px; color:var(--b); letter-spacing:4px; margin-bottom:8px;">
         ПУСТО
       </div>
-      <p style="font-size:11px; color:var(--t3); letter-spacing:1px; margin-bottom:24px;">
+      <p style="font-size:13px; color:var(--t3); letter-spacing:1px; margin-bottom:24px;">
         У вас пока нет персонажей
       </p>
       <button class="action-btn primary" @click="router.push('/characters/new')">
@@ -64,7 +64,7 @@ function formatDate(iso: string): string {
         </div>
         <button
           class="action-btn danger"
-          style="padding:4px 8px; font-size:8px; flex-shrink:0;"
+          style="padding:5px 10px; font-size:12px; flex-shrink:0;"
           :disabled="deleteMutation.asyncStatus.value === 'loading'"
           @click.stop="handleDelete(char.id)"
         >✕</button>
