@@ -1,49 +1,10 @@
-<template>
-  <div class="flex flex-col w-full max-w-lg mx-auto px-4 py-6 gap-4">
-    <div class="flex items-center justify-between">
-      <h1 class="text-xl font-bold">Мои персонажи</h1>
-      <Button icon="pi pi-plus" label="Новый" @click="router.push('/new')" />
-    </div>
-
-    <div v-if="status === 'pending'" class="text-center py-8 text-gray-400">Загрузка...</div>
-
-    <div v-else-if="!data?.length" class="text-center py-8 text-gray-400">
-      У вас пока нет персонажей
-    </div>
-
-    <div
-      v-else
-      v-for="char in data"
-      :key="char.id"
-      class="flex items-center justify-between p-4 rounded-lg border border-white/10 cursor-pointer hover:border-white/30 transition-colors"
-      @click="router.push(`/${char.id}`)"
-    >
-      <div>
-        <p class="font-medium">{{ char.name }}</p>
-        <p class="text-xs text-gray-400">{{ formatDate(char.updated_at) }}</p>
-      </div>
-      <div class="flex items-center gap-2">
-        <Button
-          icon="pi pi-trash"
-          text
-          severity="danger"
-          size="small"
-          @click.stop="handleDelete(char.id)"
-          :loading="deleteMutation.asyncStatus.value === 'loading'"
-          aria-label="Удалить"
-        />
-        <span class="pi pi-chevron-right text-gray-400" />
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import Button from 'primevue/button'
+import { useSystemStore } from '@/stores/system'
 import { useCharactersQuery, useDeleteCharacter } from '@/composables/useCharacter'
 
 const router = useRouter()
+const systemStore = useSystemStore()
 const { data, status } = useCharactersQuery()
 const deleteMutation = useDeleteCharacter()
 
@@ -55,7 +16,67 @@ function formatDate(iso: string): string {
   return new Date(iso).toLocaleDateString('ru-RU', {
     day: 'numeric',
     month: 'long',
-    year: 'numeric'
+    year: 'numeric',
   })
 }
 </script>
+
+<template>
+  <div style="display:flex; flex-direction:column; height:100%;">
+    <!-- Page header -->
+    <div class="page-header">
+      <span class="page-header-title">{{ systemStore.current.short }}</span>
+      <button class="action-btn primary" @click="router.push('/characters/new')">
+        + Новый персонаж
+      </button>
+    </div>
+
+    <!-- Loading -->
+    <div v-if="status === 'pending'" style="padding:40px 20px; text-align:center; color:var(--t3); font-size:11px; letter-spacing:2px;">
+      ЗАГРУЗКА...
+    </div>
+
+    <!-- Empty -->
+    <div v-else-if="!data?.length" style="padding:60px 20px; text-align:center;">
+      <div style="font-family:var(--font-head); font-size:28px; color:var(--b); letter-spacing:4px; margin-bottom:8px;">
+        ПУСТО
+      </div>
+      <p style="font-size:11px; color:var(--t3); letter-spacing:1px; margin-bottom:24px;">
+        У вас пока нет персонажей
+      </p>
+      <button class="action-btn primary" @click="router.push('/characters/new')">
+        Создать первого персонажа
+      </button>
+    </div>
+
+    <!-- List -->
+    <div v-else style="flex:1; overflow-y:auto;">
+      <div
+        v-for="char in data"
+        :key="char.id"
+        class="char-list-item"
+        @click="router.push(`/characters/${char.id}`)"
+      >
+        <span class="char-list-dot" />
+        <div style="flex:1; min-width:0;">
+          <div class="char-list-name">{{ char.name }}</div>
+          <div class="char-list-meta">{{ formatDate(char.updated_at) }}</div>
+        </div>
+        <button
+          class="action-btn danger"
+          style="padding:4px 8px; font-size:8px; flex-shrink:0;"
+          :disabled="deleteMutation.asyncStatus.value === 'loading'"
+          @click.stop="handleDelete(char.id)"
+        >✕</button>
+        <span style="color:var(--t3); font-size:12px; flex-shrink:0;">›</span>
+      </div>
+    </div>
+
+    <!-- Mork Borg demo link when mork active -->
+    <div v-if="systemStore.currentId === 'mork'" style="padding:12px 20px; border-top:1px solid var(--b2);">
+      <button class="action-btn" style="width:100%;" @click="router.push('/morkborg')">
+        Открыть демо-лист Mörk Borg →
+      </button>
+    </div>
+  </div>
+</template>

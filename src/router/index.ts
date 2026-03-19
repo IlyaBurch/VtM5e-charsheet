@@ -1,49 +1,50 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MainPage from '@/views/MainPage.vue'
-import LoginPage from '@/views/LoginPage.vue'
-import RegisterPage from '@/views/RegisterPage.vue'
+import AuthPage from '@/views/AuthPage.vue'
 import CharactersPage from '@/views/CharactersPage.vue'
 import CharPage from '@/views/CharPage.vue'
-import CharacterSheetPage from '@/views/CharacterSheetPage.vue'
+import MorkBorgPage from '@/views/MorkBorgPage.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: 'Main',
+      name: 'home',
       component: MainPage,
     },
     {
-      path: '/login',
-      name: 'login',
-      component: LoginPage,
+      path: '/auth',
+      name: 'auth',
+      component: AuthPage,
     },
-    {
-      path: '/register',
-      name: 'registration',
-      component: RegisterPage,
-    },
+    // Legacy redirects
+    { path: '/login',    redirect: '/auth' },
+    { path: '/register', redirect: '/auth' },
     {
       path: '/characters',
       name: 'characters',
       component: CharactersPage,
     },
     {
-      path: '/new',
+      path: '/characters/new',
       name: 'new',
       component: CharPage,
     },
     {
-      path: '/:id(\\d+)',
+      path: '/characters/:id(\\d+)',
       name: 'character',
       component: CharPage,
     },
     {
-      path: '/sheet',
-      name: 'sheet',
-      component: CharacterSheetPage,
+      path: '/morkborg',
+      name: 'morkborg',
+      component: MorkBorgPage,
     },
+    // Legacy redirects
+    { path: '/new',          redirect: '/characters/new' },
+    { path: '/:id(\\d+)',    redirect: (to) => `/characters/${to.params.id}` },
+    { path: '/sheet',        redirect: '/characters' },
   ],
 })
 

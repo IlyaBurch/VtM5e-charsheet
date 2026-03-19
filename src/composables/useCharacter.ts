@@ -36,7 +36,7 @@ export function useSaveCharacter() {
     onSuccess(data: CharacterResponse) {
       const isNew = !characterStore.characterId
       characterStore.characterId = data.id
-      if (isNew) router.replace(`/${data.id}`)
+      if (isNew) router.replace(`/characters/${data.id}`)
     },
   })
 }

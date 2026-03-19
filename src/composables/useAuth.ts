@@ -45,7 +45,7 @@ export function useLogoutMutation() {
       apiClient.post('/auth/logout').then((r) => r.data).catch(() => {}),
     onSuccess() {
       userStore.logOut()
-      router.push('/login')
+      router.push('/auth')
     },
   })
 }
