@@ -1,11 +1,12 @@
 import axios, { type InternalAxiosRequestConfig } from 'axios'
 import { useUserStore } from '@/stores/user'
+import router from '@/router'
 
 const baseURL = import.meta.env.VITE_API_URL ?? '/api'
 
 export const apiClient = axios.create({
   baseURL: baseURL,
-  withCredentials: false,
+  withCredentials: true,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
@@ -25,8 +26,8 @@ apiClient.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       useUserStore().logOut()
-      if (window.location.pathname !== '/login') {
-        window.location.href = '/login'
+      if (router.currentRoute.value.name !== 'auth') {
+        router.push('/auth')
       }
     }
     return Promise.reject(error)

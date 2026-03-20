@@ -16,6 +16,8 @@ export default defineConfig({
       injectRegister: 'auto',
       workbox: {
         cleanupOutdatedCaches: true,
+        skipWaiting: true,
+        clientsClaim: true,
         globPatterns: ['**/*.{js,css,html,ico,png,svg,json,vue,txt,woff2}']
       },
       manifest: {
